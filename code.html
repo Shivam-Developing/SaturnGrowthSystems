@@ -1,0 +1,2022 @@
+<!DOCTYPE html>
+<html class="dark scroll-smooth" lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=5.0" name="viewport">
+  <title>Saturn Growth Systems — Independent Growth Studio</title>
+  <meta name="description" content="Saturn Growth Systems solves commercial business friction, delivers high-converting digital presence, WhatsApp automation, and custom software.">
+  <meta name="theme-color" content="#0a0a0c">
+  <link href="https://fonts.googleapis.com" rel="preconnect">
+  <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,600&family=Instrument+Serif:ital@0;1&family=Space+Mono:ital,wght@0,400;0,700&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <script>
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "saturn-bg": "#0a0a0c",
+            "saturn-card": "#121317",
+            "saturn-surface": "#16171d",
+            "saturn-green": "#00df61",
+            "saturn-green-hover": "#17eb6f",
+            "saturn-gold": "#E5A93C",
+            "saturn-cream": "#f4f4f0",
+            "saturn-muted": "#8d9099",
+            "saturn-dim": "#4e5058",
+            "saturn-border": "rgba(255, 255, 255, 0.08)",
+            "saturn-border-light": "rgba(255, 255, 255, 0.16)",
+            "stitch-green": "rgba(0, 223, 97, 0.45)",
+            "stitch-ivory": "rgba(244, 244, 240, 0.22)"
+          },
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
+            serif: ['"Instrument Serif"', 'Georgia', 'serif'],
+            mono: ['"Space Mono"', 'monospace'],
+            syne: ['"Syne"', 'sans-serif'],
+          },
+          animation: {
+            'marquee': 'marquee 32s linear infinite',
+            'marquee-slow': 'marquee 40s linear infinite',
+            'float-subtle': 'floatSubtle 6s ease-in-out infinite',
+            'pulse-soft': 'pulseSoft 3s ease-in-out infinite'
+          },
+          keyframes: {
+            marquee: {
+              '0%': { transform: 'translateX(0%)' },
+              '100%': { transform: 'translateX(-50%)' },
+            },
+            floatSubtle: {
+              '0%, 100%': { transform: 'translateY(0px)' },
+              '50%': { transform: 'translateY(-6px)' }
+            },
+            pulseSoft: {
+              '0%, 100%': { opacity: '0.85', transform: 'scale(1)' },
+              '50%': { opacity: '1', transform: 'scale(1.04)' }
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    @layer base {
+      html, body {
+        background-color: #0a0a0c;
+        color: #f4f4f0;
+        overflow-x: hidden;
+      }
+      ::-webkit-scrollbar { display: none; }
+    }
+
+    /* React Bits: Shiny Text for Green Font */
+    .shiny-text-green {
+      color: #00df61;
+      background: linear-gradient(
+        120deg,
+        #00df61 0%,
+        #00df61 28%,
+        #9bffc1 44%,
+        #ffffff 50%,
+        #9bffc1 56%,
+        #00df61 72%,
+        #00df61 100%
+      );
+      background-size: 250% 100%;
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: shiny-text 3.8s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+      display: inline-block;
+    }
+    @keyframes shiny-text {
+      0% { background-position: 250% 0; }
+      100% { background-position: -250% 0; }
+    }
+
+    /* React Bits: Glow Cursor */
+    .glow-cursor-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      pointer-events: none;
+      z-index: 99999;
+      overflow: hidden;
+    }
+    .glow-cursor-dot {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 6px;
+      height: 6px;
+      border-radius: 9999px;
+      background: #00df61;
+      pointer-events: none;
+      transform: translate(-50%, -50%);
+      transition: width 0.2s ease, height 0.2s ease, background-color 0.2s ease;
+      box-shadow: 0 0 10px #00df61, 0 0 20px #00df61;
+      will-change: transform;
+    }
+    .glow-cursor-aura {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 52px;
+      height: 52px;
+      border-radius: 9999px;
+      border: 1px solid rgba(0, 223, 97, 0.35);
+      background: radial-gradient(circle, rgba(0, 223, 97, 0.16) 0%, rgba(0, 223, 97, 0.04) 50%, transparent 75%);
+      pointer-events: none;
+      transform: translate(-50%, -50%);
+      transition: width 0.25s cubic-bezier(0.16, 1, 0.3, 1), height 0.25s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.25s ease, background 0.25s ease, transform 0.1s ease-out;
+      will-change: transform;
+    }
+    .glow-cursor-aura.hovered {
+      width: 84px;
+      height: 84px;
+      border-color: rgba(0, 223, 97, 0.85);
+      background: radial-gradient(circle, rgba(0, 223, 97, 0.28) 0%, rgba(0, 223, 97, 0.08) 55%, transparent 80%);
+      box-shadow: 0 0 30px rgba(0, 223, 97, 0.25);
+    }
+    .glow-cursor-aura.clicked {
+      width: 40px;
+      height: 40px;
+      border-color: #00df61;
+      background: radial-gradient(circle, rgba(0, 223, 97, 0.4) 0%, transparent 70%);
+    }
+    /* Hide Glow Cursor on Touch / Mobile Devices */
+    @media (pointer: coarse), (hover: none) {
+      .glow-cursor-container, .glow-cursor-dot, .glow-cursor-aura {
+        display: none !important;
+      }
+    }
+
+    .grain-overlay {
+      background-image: radial-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 0);
+      background-size: 28px 28px;
+    }
+    .glow-green {
+      box-shadow: 0 0 32px rgba(0, 223, 97, 0.22);
+    }
+    .glow-subtle {
+      box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.7);
+    }
+    .font-serif-accent {
+      font-family: 'Instrument Serif', Georgia, serif;
+      font-style: italic;
+      font-weight: 400;
+      letter-spacing: -0.01em;
+      text-transform: none;
+    }
+
+    /* Stitched Embroidery & Luxury Glass Tokens */
+    .glass-card {
+      background: rgba(18, 19, 23, 0.76);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      position: relative;
+    }
+    .glass-card::before {
+      content: '';
+      position: absolute;
+      inset: 3px;
+      border: 1px dashed rgba(244, 244, 240, 0.12);
+      border-radius: inherit;
+      pointer-events: none;
+      transition: border-color 0.3s ease;
+    }
+    .glass-card:hover::before {
+      border-color: rgba(0, 223, 97, 0.45);
+    }
+    .glass-card-green::before {
+      border-color: rgba(0, 223, 97, 0.3);
+    }
+
+    /* Embroidered Buttons */
+    .btn-embroidered-primary {
+      position: relative;
+      background: #00df61;
+      color: #050607;
+      font-weight: 800;
+      box-shadow: 0 0 28px rgba(0, 223, 97, 0.28), inset 0 1px 1px rgba(255, 255, 255, 0.6);
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .btn-embroidered-primary::after {
+      content: '';
+      position: absolute;
+      inset: 2px;
+      border: 1px dashed rgba(0, 0, 0, 0.4);
+      border-radius: 9999px;
+      pointer-events: none;
+    }
+    .btn-embroidered-primary:hover {
+      background: #17eb6f;
+      transform: translateY(-2px) scale(1.02);
+      box-shadow: 0 0 38px rgba(0, 223, 97, 0.45);
+    }
+    .btn-embroidered-glass {
+      position: relative;
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      color: #f4f4f0;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .btn-embroidered-glass::after {
+      content: '';
+      position: absolute;
+      inset: 2px;
+      border: 1px dashed rgba(244, 244, 240, 0.22);
+      border-radius: 9999px;
+      pointer-events: none;
+      transition: border-color 0.3s ease;
+    }
+    .btn-embroidered-glass:hover {
+      background: rgba(255, 255, 255, 0.1);
+      border-color: rgba(0, 223, 97, 0.5);
+      transform: translateY(-2px);
+    }
+    .btn-embroidered-glass:hover::after {
+      border-color: rgba(0, 223, 97, 0.6);
+    }
+
+    /* Scroll Reveal */
+    .reveal-elem {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .reveal-elem.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Mobile Drawer */
+    #mobile-drawer {
+      transition: opacity 0.3s ease, transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    #mobile-drawer.open {
+      opacity: 1;
+      pointer-events: auto;
+      transform: translateY(0);
+    }
+    #mobile-drawer.closed {
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(-8px);
+    }
+  </style>
+</head>
+<body class="bg-saturn-bg font-sans text-saturn-cream selection:bg-saturn-green selection:text-black antialiased relative">
+
+<!-- React Bits: Glow Cursor Container -->
+<div class="glow-cursor-container" id="glow-cursor-wrap">
+  <div class="glow-cursor-aura" id="glow-cursor-aura"></div>
+  <div class="glow-cursor-dot" id="glow-cursor-dot"></div>
+</div>
+
+<!-- NAVIGATION HEADER WITH GLASSMORPHISM & EMBROIDERED STITCHED BOTTOM ACCENT -->
+<header class="fixed top-0 inset-x-0 z-50 bg-[#0a0a0c]/85 backdrop-blur-2xl border-b border-dashed border-white/10 transition-all duration-300">
+  <div class="max-w-[1600px] mx-auto h-16 sm:h-20 px-4 sm:px-8 lg:px-12 xl:px-14 flex items-center justify-between">
+    <!-- Brand Glyph & Wordmark -->
+    <div class="flex items-center gap-4 sm:gap-6">
+      <a class="group flex items-center gap-3" href="#" aria-label="Saturn Growth Systems Home">
+        <img alt="Saturn Growth Systems Logo" class="h-8 sm:h-10 w-auto object-contain transition-transform duration-500 group-hover:scale-105" src="https://lh3.googleusercontent.com/aida/AEtjO1WUe0dj_8mmKQ_lgLday6r0Twpu_1qvqzTe5o4DOtgiOfUf-Vof_H6cNkte3lRg0uHOrLgyTXCVj4x1oBHBG9Ms4xI66OAR61waSsjmXvQBvg5m6K_vstoKas7xvGfCrNB7gVswKJyNrB18Rl2zEp08nPRL-QDuSGWn2mMRrx8nK6DHeJu_BWujsKe17C8Cib2nxKoc5sikU_sdwMLoTsbzXXblWnqa1oWZD-WvTKLpNKpang-stIkK6z0">
+      </a>
+      <span class="hidden 2xl:inline-block font-mono text-[11px] tracking-[0.2em] text-saturn-muted uppercase pl-4 border-l border-white/10" data-i18n="header-tag">
+        INDEPENDENT GROWTH STUDIO
+      </span>
+    </div>
+
+    <!-- Navigation Anchors with Smooth Scrolling Links (Desktop) -->
+    <nav class="hidden lg:flex items-center gap-7 text-[11.5px] font-mono tracking-[0.16em] uppercase text-saturn-muted">
+      <a class="hover:text-saturn-green transition-colors" href="#problem" data-i18n="nav-problem">Problem</a>
+      <a class="hover:text-saturn-green transition-colors" href="#disciplines" data-i18n="nav-disciplines">Disciplines</a>
+      <a class="hover:text-saturn-green transition-colors" href="#systems" data-i18n="nav-systems">Systems</a>
+      <a class="hover:text-saturn-green transition-colors" href="#verticals" data-i18n="nav-verticals">Verticals</a>
+      <a class="hover:text-saturn-green transition-colors" href="#approach" data-i18n="nav-approach">Approach</a>
+      <a class="hover:text-saturn-green transition-colors" href="#outcomes" data-i18n="nav-outcomes">Outcomes</a>
+      <a class="hover:text-saturn-green transition-colors" href="#contact" data-i18n="nav-contact">Contact</a>
+    </nav>
+
+    <!-- Language Switcher & Actions -->
+    <div class="flex items-center gap-2 sm:gap-4">
+      <!-- Segmented Pill Switcher -->
+      <div class="flex items-center p-0.5 sm:p-1 rounded-full bg-white/[0.04] border border-white/10 backdrop-blur-md font-mono text-xs">
+        <button class="px-2.5 sm:px-3 py-1 rounded-full bg-saturn-green text-black font-bold transition-all shadow-sm text-[11px] sm:text-xs" id="lang-en" onclick="setLanguage('en')">EN</button>
+        <button class="px-2.5 sm:px-3 py-1 rounded-full text-saturn-muted hover:text-white transition-all text-[11px] sm:text-xs" id="lang-hi" onclick="setLanguage('hi')">हिंग्लिश</button>
+      </div>
+
+      <!-- Desktop CTA Button -->
+      <a class="hidden sm:inline-flex btn-embroidered-primary items-center gap-2 px-4 sm:px-5 py-2 sm:py-2.5 rounded-full text-xs uppercase tracking-wider glow-green" href="#contact">
+        <span data-i18n="nav-cta">Book Consultation</span>
+        <span class="font-normal text-sm">↗</span>
+      </a>
+
+      <!-- Mobile Hamburger Button -->
+      <button class="lg:hidden p-2 rounded-xl bg-white/[0.04] border border-white/10 text-saturn-cream hover:text-saturn-green transition-colors focus:outline-none" id="hamburger-btn" onclick="toggleMobileMenu()" aria-label="Toggle Navigation Menu">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" id="hamburger-icon">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile Glass Drawer -->
+  <div class="lg:hidden fixed inset-x-0 top-16 sm:top-20 bg-[#0a0a0c]/95 backdrop-blur-2xl border-b border-dashed border-white/15 px-6 py-8 closed" id="mobile-drawer">
+    <nav class="flex flex-col gap-4 font-mono text-xs uppercase tracking-widest text-saturn-muted mb-6">
+      <a class="py-2 hover:text-saturn-green transition-colors border-b border-white/5" href="#problem" onclick="toggleMobileMenu()" data-i18n="nav-problem">Problem</a>
+      <a class="py-2 hover:text-saturn-green transition-colors border-b border-white/5" href="#disciplines" onclick="toggleMobileMenu()" data-i18n="nav-disciplines">Disciplines</a>
+      <a class="py-2 hover:text-saturn-green transition-colors border-b border-white/5" href="#systems" onclick="toggleMobileMenu()" data-i18n="nav-systems">Systems</a>
+      <a class="py-2 hover:text-saturn-green transition-colors border-b border-white/5" href="#verticals" onclick="toggleMobileMenu()" data-i18n="nav-verticals">Verticals</a>
+      <a class="py-2 hover:text-saturn-green transition-colors border-b border-white/5" href="#approach" onclick="toggleMobileMenu()" data-i18n="nav-approach">Approach</a>
+      <a class="py-2 hover:text-saturn-green transition-colors border-b border-white/5" href="#outcomes" onclick="toggleMobileMenu()" data-i18n="nav-outcomes">Outcomes</a>
+      <a class="py-2 hover:text-saturn-green transition-colors border-b border-white/5" href="#contact" onclick="toggleMobileMenu()" data-i18n="nav-contact">Contact</a>
+    </nav>
+    <a class="btn-embroidered-primary w-full py-3 px-6 rounded-full text-xs uppercase tracking-wider flex items-center justify-center gap-2" href="#contact" onclick="toggleMobileMenu()">
+      <span data-i18n="nav-cta">Book Consultation</span>
+      <span>↗</span>
+    </a>
+  </div>
+</header>
+
+<main class="w-full relative">
+  <!-- 1. HERO SECTION (HERO HEADLINE, AURORA BACKGROUND, GLASS & EMBROIDERED CTAS, CURVED OLED SHOWCASE) -->
+  <section class="relative w-full pt-28 sm:pt-36 lg:pt-40 pb-16 sm:pb-20 overflow-hidden border-b border-white/10">
+    <!-- React Bits: Aurora Background Canvas in Hero Section -->
+    <canvas id="aurora-canvas" class="absolute inset-0 w-full h-full pointer-events-none z-0 opacity-45 mix-blend-screen"></canvas>
+
+    <div class="max-w-[1600px] w-full mx-auto px-4 sm:px-8 lg:px-12 xl:px-14 relative z-10">
+      <!-- Eyebrow Pill with Embroidered Dashed Frame -->
+      <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/[0.04] border border-dashed border-white/15 mb-6 backdrop-blur-md">
+        <span class="w-2 h-2 rounded-full bg-saturn-green animate-ping"></span>
+        <span class="font-mono text-[10px] sm:text-xs text-saturn-cream uppercase tracking-widest" data-i18n="hero-tag">SATURN GROWTH SYSTEMS ◆ INDEPENDENT STUDIO</span>
+      </div>
+
+      <!-- Monumental Editorial Hero Headline with Particle Text Integration & Shiny Text -->
+      <div class="relative max-w-6xl">
+        <h1 class="font-syne font-extrabold text-[36px] sm:text-[64px] md:text-[84px] lg:text-[104px] xl:text-[116px] leading-[0.96] tracking-[-0.035em] uppercase text-white">
+          <span data-i18n="hero-headline-1" id="particle-text-anchor">WE SOLVE BUSINESS PROBLEMS.</span><br>
+          <span class="font-serif-accent text-saturn-green text-[46px] sm:text-[82px] md:text-[112px] lg:text-[136px] xl:text-[148px] leading-[0.90] block mt-1 tracking-normal lowercase shiny-text-green" data-i18n="hero-headline-2">you grow.</span>
+        </h1>
+        <!-- Canvas for particle text interactive repulsion -->
+        <canvas id="particle-text-canvas" class="absolute inset-0 pointer-events-none z-20"></canvas>
+      </div>
+
+      <!-- Editorial Subtitle & Actions -->
+      <div class="mt-8 grid grid-cols-1 lg:grid-cols-12 gap-8 items-end">
+        <div class="lg:col-span-9">
+          <p class="text-base sm:text-lg lg:text-xl text-saturn-cream/85 max-w-3xl font-normal leading-relaxed tracking-normal" data-i18n="hero-sub">
+            Your business does not need more technology just for the sake of technology. It needs more customers, more enquiries, better operations, and more revenue. That is where Saturn Growth Systems comes in.
+          </p>
+          <div class="mt-8 sm:mt-9 flex flex-wrap items-center gap-4 sm:gap-6">
+            <a class="btn-embroidered-primary inline-flex items-center gap-3 px-6 sm:px-8 py-3.5 sm:py-4 rounded-full text-xs uppercase tracking-wider" href="#contact">
+              <span data-i18n="cta-primary">Book a Growth Consultation</span>
+              <span class="text-base">→</span>
+            </a>
+            <a class="btn-embroidered-glass inline-flex items-center gap-2 px-6 sm:px-8 py-3.5 sm:py-4 rounded-full text-xs uppercase tracking-wider" href="#contact">
+              <span data-i18n="cta-secondary">Tell Us Your Problem</span>
+              <span class="text-xs">↗</span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Expansive Cinematic Showcase Image in Glass Container with Stitched Dashed Border Framing -->
+      <div class="mt-12 sm:mt-14 relative rounded-3xl overflow-hidden glass-card glow-subtle group p-2">
+        <div class="relative rounded-2xl overflow-hidden border border-white/10 aspect-[16/10] sm:aspect-[16/9] max-h-[680px]">
+          <img alt="Saturn Growth Systems Operations & Curved OLED Telemetry Studio" class="w-full h-full object-cover object-center group-hover:scale-[1.02] transition-transform duration-1000 ease-out filter contrast-[1.05]" src="images/saturn_telemetry_hero.jpg">
+          <div class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-transparent pointer-events-none"></div>
+          <div class="absolute bottom-4 sm:bottom-6 left-4 sm:left-6 right-4 sm:right-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 sm:gap-4 font-mono text-xs">
+            <div class="flex items-center gap-3 bg-black/80 backdrop-blur-md px-3.5 sm:px-4 py-1.5 sm:py-2 rounded-full border border-dashed border-white/20">
+              <span class="w-2 h-2 rounded-full bg-saturn-green animate-ping"></span>
+              <span class="text-saturn-cream uppercase tracking-wider text-[10px] sm:text-xs" data-i18n="hero-telemetry-badge">SATURN TELEMETRY CONSOLE // ORBITAL NODE ACTIVE</span>
+            </div>
+            <span class="text-saturn-muted hidden sm:inline-block tracking-widest uppercase text-[10px] sm:text-xs" data-i18n="hero-telemetry-discipline">DISCIPLINE: GROWTH SYSTEMS ARCHITECTURE</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SLEEK TICKER MARQUEE STRIP -->
+  <div class="w-full bg-[#08090b] border-b border-dashed border-white/10 overflow-hidden py-3 sm:py-4 select-none">
+    <div class="flex whitespace-nowrap animate-marquee items-center text-xs font-mono tracking-[0.2em] text-saturn-cream uppercase">
+      <span class="mx-6">GROWTH ARCHITECTURE</span>
+      <span class="text-saturn-green text-[10px]">◆</span>
+      <span class="mx-6">DIGITAL PRESENCE</span>
+      <span class="text-saturn-green text-[10px]">◆</span>
+      <span class="mx-6">BUSINESS AUTOMATION</span>
+      <span class="text-saturn-green text-[10px]">◆</span>
+      <span class="mx-6">AI SYSTEMS</span>
+      <span class="text-saturn-green text-[10px]">◆</span>
+      <span class="mx-6">PIPELINE VELOCITY</span>
+      <span class="text-saturn-green text-[10px]">◆</span>
+      <span class="mx-6">CUSTOM SOFTWARE</span>
+      <span class="text-saturn-green text-[10px]">◆</span>
+      <span class="mx-6">GROWTH ARCHITECTURE</span>
+      <span class="text-saturn-green text-[10px]">◆</span>
+      <span class="mx-6">DIGITAL PRESENCE</span>
+      <span class="text-saturn-green text-[10px]">◆</span>
+      <span class="mx-6">BUSINESS AUTOMATION</span>
+      <span class="text-saturn-green text-[10px]">◆</span>
+      <span class="mx-6">AI SYSTEMS</span>
+      <span class="text-saturn-green text-[10px]">◆</span>
+      <span class="mx-6">PIPELINE VELOCITY</span>
+      <span class="text-saturn-green text-[10px]">◆</span>
+      <span class="mx-6">CUSTOM SOFTWARE</span>
+      <span class="text-saturn-green text-[10px]">◆</span>
+    </div>
+  </div>
+
+  <!-- SECTION 2: OUR APPROACH / WHAT GUIDES THE WORK (GLASS & EMBROIDERY CARDS) -->
+  <section class="py-20 sm:py-28 lg:py-32 px-4 sm:px-8 lg:px-12 xl:px-14 max-w-[1600px] mx-auto reveal-elem active" id="problem">
+    <div class="flex items-center justify-between border-b border-dashed border-white/15 pb-5 mb-10 sm:mb-14">
+      <span class="font-mono text-[10px] sm:text-[11px] tracking-[0.2em] text-saturn-muted uppercase" data-i18n="sec2-tag">[ OUR APPROACH // WHAT GUIDES THE WORK ]</span>
+      <span class="font-mono text-[10px] sm:text-[11px] tracking-[0.2em] text-saturn-green font-bold">SECTION 02</span>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-start">
+      <!-- Left Column: Editorial Statement -->
+      <div class="lg:col-span-7">
+        <p class="font-mono text-xs text-saturn-green uppercase tracking-[0.2em] mb-3 sm:mb-4" data-i18n="sec2-pill">Our Approach / What guides the work</p>
+        <h2 class="text-2xl sm:text-4xl lg:text-5xl xl:text-6xl font-syne font-extrabold tracking-[-0.03em] uppercase text-white leading-[1.08]" data-i18n="sec1-title">
+          Your Problem Comes First. <br>
+          <span class="font-serif-accent text-saturn-green text-3xl sm:text-5xl lg:text-6xl xl:text-7xl block mt-1 tracking-normal shiny-text-green">Our Solution Comes Second.</span>
+        </h2>
+        <div class="mt-6 sm:mt-8 space-y-4 sm:space-y-5 text-sm sm:text-base lg:text-lg text-saturn-muted font-normal leading-relaxed" data-i18n="sec1-editorial-body">
+          <p>Most agencies sell what they already know how to build. We work differently. We first understand: What is costing you customers? Where are leads getting lost? What is taking your team too much time? What could be automated? What is preventing your business from growing faster?</p>
+          <p>Then we design and implement the solution that addresses the real problem. No unnecessary features. No complicated technical language. No one-size-fits-all packages. Just solutions built around your business.</p>
+        </div>
+      </div>
+
+      <!-- Right Column: Featured Kinetic Diagnostic Sculpture Frame -->
+      <div class="lg:col-span-5">
+        <div class="relative rounded-2xl overflow-hidden glass-card group bg-black shadow-2xl p-1.5">
+          <div class="rounded-xl overflow-hidden border border-white/10 aspect-[3/4] max-h-[460px]">
+            <img alt="Saturn Diagnostic Protocol & Kinetic Node Sculpture" class="w-full h-full object-cover object-center group-hover:scale-105 transition-all duration-700" src="images/saturn_diagnostic_sculpture.jpg">
+          </div>
+          <div class="p-4 sm:p-5 border-t border-dashed border-white/10 bg-[#121317]/90 flex items-center justify-between mt-1 rounded-b-xl">
+            <div>
+              <p class="font-mono text-[10px] text-saturn-muted uppercase tracking-[0.16em]" data-i18n="diag-proto-tag">01 ◆ SATURN DIAGNOSTIC PROTOCOL</p>
+              <p class="font-syne font-bold text-xs sm:text-sm text-saturn-cream mt-0.5" data-i18n="diag-proto-title">Proprietary Root-Cause Systems Audit</p>
+            </div>
+            <span class="font-mono text-[10px] sm:text-[11px] text-saturn-green font-bold flex items-center gap-1.5">
+              <span class="w-2 h-2 rounded-full bg-saturn-green animate-ping"></span> ACTIVE
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Numbered Diagnostic Rail (Embroidered Glass Cards) -->
+    <div class="mt-12 sm:mt-16 lg:mt-20">
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 border-t border-dashed border-white/15 pt-8">
+        <div class="p-5 sm:p-6 rounded-2xl glass-card hover:translate-y-[-3px] transition-all">
+          <span class="font-mono text-xs text-saturn-green block mb-2 font-bold" data-i18n="q1-num">01 // LEAKAGE</span>
+          <h4 class="font-syne font-bold text-sm sm:text-base text-white mb-1.5" data-i18n="q1-t">Costing Customers?</h4>
+          <p class="text-xs text-saturn-muted leading-relaxed" data-i18n="q1-d">Unclear messaging, delayed responses, friction in checkouts, or lack of social proof that repels buyers.</p>
+        </div>
+        <div class="p-5 sm:p-6 rounded-2xl glass-card hover:translate-y-[-3px] transition-all">
+          <span class="font-mono text-xs text-saturn-green block mb-2 font-bold" data-i18n="q2-num">02 // DROPOFF</span>
+          <h4 class="font-syne font-bold text-sm sm:text-base text-white mb-1.5" data-i18n="q2-t">Lost Leads?</h4>
+          <p class="text-xs text-saturn-muted leading-relaxed" data-i18n="q2-d">Messages left unread, slow follow-ups, lost inquiries between reps, or no automated retargeting loop.</p>
+        </div>
+        <div class="p-5 sm:p-6 rounded-2xl glass-card hover:translate-y-[-3px] transition-all">
+          <span class="font-mono text-xs text-saturn-green block mb-2 font-bold" data-i18n="q3-num">03 // DRAG</span>
+          <h4 class="font-syne font-bold text-sm sm:text-base text-white mb-1.5" data-i18n="q3-t">Team Time Waste?</h4>
+          <p class="text-xs text-saturn-muted leading-relaxed" data-i18n="q3-d">Manual data entry, repetitive phone calls, compiling reports manually, and endless admin coordination.</p>
+        </div>
+        <div class="p-5 sm:p-6 rounded-2xl glass-card hover:translate-y-[-3px] transition-all">
+          <span class="font-mono text-xs text-saturn-green block mb-2 font-bold" data-i18n="q4-num">04 // AUTOMATION</span>
+          <h4 class="font-syne font-bold text-sm sm:text-base text-white mb-1.5" data-i18n="q4-t">Automatable Friction?</h4>
+          <p class="text-xs text-saturn-muted leading-relaxed" data-i18n="q4-d">Instant customer responses, appointment booking, invoices, client onboarding, and automated reminders.</p>
+        </div>
+        <div class="p-5 sm:p-6 rounded-2xl glass-card hover:translate-y-[-3px] transition-all sm:col-span-2 lg:col-span-1">
+          <span class="font-mono text-xs text-saturn-green block mb-2 font-bold" data-i18n="q5-num">05 // CEILING</span>
+          <h4 class="font-syne font-bold text-sm sm:text-base text-white mb-1.5" data-i18n="q5-t">Growth Bottlenecks?</h4>
+          <p class="text-xs text-saturn-muted leading-relaxed" data-i18n="q5-d">Inconsistent leads, poor conversion rates, operational chaos when volume increases, or lacking modern software.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 3: WORK THAT SPEAKS FOR ITSELF / SYSTEMS (LIRCLE SHOWCASE GRID WITH ENTERPRISE TECH IMAGES) -->
+  <section class="py-20 sm:py-28 lg:py-32 bg-[#090a0d] border-t border-dashed border-white/15 reveal-elem active" id="systems">
+    <div class="max-w-[1600px] mx-auto px-4 sm:px-8 lg:px-12 xl:px-14">
+      <div class="flex flex-col sm:flex-row sm:items-end justify-between mb-12 sm:mb-16 gap-6 border-b border-dashed border-white/15 pb-6">
+        <div>
+          <span class="font-mono text-[10px] sm:text-[11px] tracking-[0.2em] text-saturn-muted uppercase" data-i18n="sys-tag">[ SELECTED SYSTEMS // 03 ]</span>
+          <h2 class="text-2xl sm:text-4xl lg:text-5xl xl:text-6xl font-syne font-extrabold uppercase tracking-tight text-white mt-2 leading-tight" data-i18n="sys-title">
+            WORK THAT <span class="font-serif-accent text-saturn-green lowercase text-3xl sm:text-5xl lg:text-6xl xl:text-7xl shiny-text-green">speaks for itself</span>
+          </h2>
+        </div>
+        <div class="font-mono text-[10px] sm:text-xs text-saturn-muted tracking-[0.2em] uppercase" data-i18n="sys-arch">
+          OPERATIONAL ARCHIVES // <span class="text-saturn-green font-bold">01 / 04</span>
+        </div>
+      </div>
+
+      <!-- Asymmetrical 1-2 Grid Layout with HD Assets -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-start">
+        <!-- Card 1: Enterprise Revenue Telemetry -->
+        <div class="lg:col-span-7 group cursor-pointer">
+          <div class="relative aspect-[16/10] w-full overflow-hidden rounded-2xl glass-card p-1.5">
+            <div class="relative w-full h-full rounded-xl overflow-hidden">
+              <img alt="Enterprise Revenue Telemetry & Command Center" class="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700 ease-out filter contrast-[1.05]" src="images/saturn_enterprise_telemetry.jpg">
+              <div class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-transparent opacity-80 group-hover:opacity-50 transition-opacity"></div>
+              <div class="absolute top-4 left-4">
+                <span class="px-3 py-1 rounded-full bg-black/75 backdrop-blur-md border border-dashed border-white/20 font-mono text-[10px] tracking-wider text-saturn-cream uppercase" data-i18n="card1-tag">01 ◆ ENTERPRISE TELEMETRY</span>
+              </div>
+            </div>
+          </div>
+          <div class="pt-5 flex items-start justify-between">
+            <div>
+              <h3 class="text-lg sm:text-xl lg:text-2xl font-syne font-bold uppercase tracking-tight text-white group-hover:text-saturn-green transition-colors" data-i18n="card1-t">
+                ENTERPRISE REVENUE TELEMETRY & COMMAND CENTER
+              </h3>
+              <p class="text-xs sm:text-sm text-saturn-muted mt-2 leading-relaxed font-normal max-w-xl" data-i18n="card1-d">
+                Real-time pipeline monitoring, automated multi-display sync, conversion anomaly detection, and unified executive metrics.
+              </p>
+            </div>
+            <span class="text-saturn-green text-xl sm:text-2xl group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform ml-4 shrink-0">↗</span>
+          </div>
+        </div>
+
+        <!-- Card 2: Saturn Core Node Proprietary Hardware Backbone -->
+        <div class="lg:col-span-5 group cursor-pointer">
+          <div class="relative aspect-[16/10] w-full overflow-hidden rounded-2xl glass-card p-1.5">
+            <div class="relative w-full h-full rounded-xl overflow-hidden">
+              <img alt="Saturn Core Node Proprietary Business Backbone" class="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700 ease-out filter contrast-[1.05]" src="images/saturn_server_backbone.jpg">
+              <div class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-transparent opacity-80 group-hover:opacity-50 transition-opacity"></div>
+              <div class="absolute top-4 left-4">
+                <span class="px-3 py-1 rounded-full bg-black/75 backdrop-blur-md border border-dashed border-white/20 font-mono text-[10px] tracking-wider text-saturn-cream uppercase" data-i18n="card2-tag">02 ◆ SATURN CORE NODE</span>
+              </div>
+            </div>
+          </div>
+          <div class="pt-5 flex items-start justify-between">
+            <div>
+              <h3 class="text-lg sm:text-xl lg:text-2xl font-syne font-bold uppercase tracking-tight text-white group-hover:text-saturn-green transition-colors" data-i18n="card2-t">
+                PROPRIETARY BUSINESS BACKBONE
+              </h3>
+              <p class="text-xs sm:text-sm text-saturn-muted mt-2 leading-relaxed font-normal" data-i18n="card2-d">
+                High-throughput data orchestration server, custom automated pipelines, sub-second trigger engine, and secure offline failover.
+              </p>
+            </div>
+            <span class="text-saturn-green text-xl sm:text-2xl group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform ml-4 shrink-0">↗</span>
+          </div>
+        </div>
+
+        <!-- Card 3: Autonomous Lead Routing Console -->
+        <div class="lg:col-span-5 group cursor-pointer">
+          <div class="relative aspect-[16/10] w-full overflow-hidden rounded-2xl glass-card p-1.5">
+            <div class="relative w-full h-full rounded-xl overflow-hidden">
+              <img alt="Autonomous Lead Routing & Omnichannel Glass Console" class="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700 ease-out filter contrast-[1.05]" src="images/saturn_lead_console.jpg">
+              <div class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-transparent opacity-80 group-hover:opacity-50 transition-opacity"></div>
+              <div class="absolute top-4 left-4">
+                <span class="px-3 py-1 rounded-full bg-black/75 backdrop-blur-md border border-dashed border-white/20 font-mono text-[10px] tracking-wider text-saturn-cream uppercase" data-i18n="card3-tag">03 ◆ OMNICHANNEL CONSOLE</span>
+              </div>
+            </div>
+          </div>
+          <div class="pt-5 flex items-start justify-between">
+            <div>
+              <h3 class="text-lg sm:text-xl lg:text-2xl font-syne font-bold uppercase tracking-tight text-white group-hover:text-saturn-green transition-colors" data-i18n="card3-t">
+                AUTONOMOUS LEAD ROUTING & GLASS CONSOLE
+              </h3>
+              <p class="text-xs sm:text-sm text-saturn-muted mt-2 leading-relaxed font-normal" data-i18n="card3-d">
+                Dynamic intake app, instant automated qualification, synced CRM dispatch, and real-time deal alerts directly to phones.
+              </p>
+            </div>
+            <span class="text-saturn-green text-xl sm:text-2xl group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform ml-4 shrink-0">↗</span>
+          </div>
+        </div>
+
+        <!-- Card 4: Executive Growth Architecture -->
+        <div class="lg:col-span-7 group cursor-pointer">
+          <div class="relative aspect-[16/10] w-full overflow-hidden rounded-2xl glass-card p-1.5">
+            <div class="relative w-full h-full rounded-xl overflow-hidden">
+              <img alt="Executive Growth Architecture & Decision Engine" class="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700 ease-out filter contrast-[1.05]" src="images/saturn_decision_engine.jpg">
+              <div class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-transparent opacity-80 group-hover:opacity-50 transition-opacity"></div>
+              <div class="absolute top-4 left-4">
+                <span class="px-3 py-1 rounded-full bg-black/75 backdrop-blur-md border border-dashed border-white/20 font-mono text-[10px] tracking-wider text-saturn-cream uppercase" data-i18n="card4-tag">04 ◆ EXECUTIVE DECISION ENGINE</span>
+              </div>
+            </div>
+          </div>
+          <div class="pt-5 flex items-start justify-between">
+            <div>
+              <h3 class="text-lg sm:text-xl lg:text-2xl font-syne font-bold uppercase tracking-tight text-white group-hover:text-saturn-green transition-colors" data-i18n="card4-t">
+                EXECUTIVE GROWTH ARCHITECTURE & DECISION ENGINE
+              </h3>
+              <p class="text-xs sm:text-sm text-saturn-muted mt-2 leading-relaxed font-normal max-w-xl" data-i18n="card4-d">
+                Multi-department operations alignment, data-backed roadmap execution, and synchronized automated reporting for leadership.
+              </p>
+            </div>
+            <span class="text-saturn-green text-xl sm:text-2xl group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform ml-4 shrink-0">↗</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 4: DISCIPLINES THAT MOVE TOGETHER (ID="DISCIPLINES") -->
+  <section class="py-20 sm:py-28 lg:py-32 bg-black border-t border-dashed border-white/15 reveal-elem active" id="disciplines">
+    <div class="max-w-[1600px] mx-auto px-4 sm:px-8 lg:px-12 xl:px-14">
+      <div class="flex items-center justify-between border-b border-dashed border-white/15 pb-5 mb-10 sm:mb-12">
+        <span class="font-mono text-[10px] sm:text-[11px] tracking-[0.2em] text-saturn-muted uppercase" data-i18n="disc-tag">[ COMPREHENSIVE CAPABILITIES // 04 ]</span>
+        <span class="font-mono text-[10px] sm:text-[11px] tracking-[0.2em] text-saturn-green font-bold" data-i18n="disc-count">9 DISCIPLINES</span>
+      </div>
+
+      <h2 class="text-2xl sm:text-4xl lg:text-5xl xl:text-6xl font-syne font-extrabold uppercase tracking-tight text-white mb-10 sm:mb-14 leading-tight" data-i18n="disc-title">
+        DISCIPLINES <span class="font-serif-accent text-saturn-green lowercase text-3xl sm:text-5xl lg:text-6xl xl:text-7xl shiny-text-green">that move together</span>
+      </h2>
+
+      <!-- The 9 Exact Services Accordion / Matrix -->
+      <div class="divide-y divide-white/10 border-y border-dashed border-white/15">
+        <!-- 01 Websites & Digital Presence -->
+        <div class="service-row group py-5 sm:py-7 cursor-pointer transition-all duration-300" onclick="toggleService(this)">
+          <div class="flex items-center justify-between">
+            <div class="flex items-center gap-4 sm:gap-8">
+              <span class="font-mono text-xs sm:text-sm text-saturn-muted group-hover:text-saturn-green transition-colors">01</span>
+              <h3 class="text-base sm:text-xl lg:text-2xl xl:text-3xl font-syne font-bold uppercase tracking-tight text-saturn-cream group-hover:text-saturn-green transition-colors" data-i18n="srv-1-t">Websites & Digital Presence</h3>
+            </div>
+            <div class="flex items-center gap-4">
+              <span class="hidden md:inline-block font-mono text-[11px] text-saturn-muted uppercase tracking-wider" data-i18n="srv-1-pill">Fast ◆ High-Converting ◆ Mobile-First</span>
+              <span class="srv-icon font-mono text-base sm:text-lg text-saturn-green transition-transform duration-300">＋</span>
+            </div>
+          </div>
+          <div class="srv-detail max-h-0 overflow-hidden transition-all duration-500 ease-in-out">
+            <div class="pt-5 pl-8 sm:pl-16 pr-2 sm:pr-4 grid grid-cols-1 md:grid-cols-12 gap-5 text-saturn-muted text-xs sm:text-sm lg:text-base leading-relaxed">
+              <p class="md:col-span-8 font-normal" data-i18n="srv-1-d">Websites built for speed, immediate customer trust, and seamless enquiry generation. Includes custom portfolio portals, sales landing pages, and institutional web presences engineered to convert visitors into phone calls and booked appointments.</p>
+              <div class="md:col-span-4 flex flex-wrap gap-2 items-start">
+                <span class="px-2.5 py-1 rounded-full bg-white/[0.04] border border-dashed border-white/20 font-mono text-xs text-saturn-cream">Sub-second TTFB</span>
+                <span class="px-2.5 py-1 rounded-full bg-white/[0.04] border border-dashed border-white/20 font-mono text-xs text-saturn-cream">Conversion Architecture</span>
+                <span class="px-2.5 py-1 rounded-full bg-white/[0.04] border border-dashed border-white/20 font-mono text-xs text-saturn-cream">Next.js Edge</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 02 Marketing & Lead Generation -->
+        <div class="service-row group py-5 sm:py-7 cursor-pointer transition-all duration-300" onclick="toggleService(this)">
+          <div class="flex items-center justify-between">
+            <div class="flex items-center gap-4 sm:gap-8">
+              <span class="font-mono text-xs sm:text-sm text-saturn-muted group-hover:text-saturn-green transition-colors">02</span>
+              <h3 class="text-base sm:text-xl lg:text-2xl xl:text-3xl font-syne font-bold uppercase tracking-tight text-saturn-cream group-hover:text-saturn-green transition-colors" data-i18n="srv-2-t">Marketing & Lead Generation</h3>
+            </div>
+            <div class="flex items-center gap-4">
+              <span class="hidden md:inline-block font-mono text-[11px] text-saturn-muted uppercase tracking-wider" data-i18n="srv-2-pill">Meta Ads ◆ Google Funnels ◆ Inbound Flow</span>
+              <span class="srv-icon font-mono text-base sm:text-lg text-saturn-green transition-transform duration-300">＋</span>
+            </div>
+          </div>
+          <div class="srv-detail max-h-0 overflow-hidden transition-all duration-500 ease-in-out">
+            <div class="pt-5 pl-8 sm:pl-16 pr-2 sm:pr-4 grid grid-cols-1 md:grid-cols-12 gap-5 text-saturn-muted text-xs sm:text-sm lg:text-base leading-relaxed">
+              <p class="md:col-span-8 font-normal" data-i18n="srv-2-d">Paid ad funnels, search visibility, high-intent lead magnets, and automated customer qualification that brings serious buyers to your door rather than casual clickers.</p>
+              <div class="md:col-span-4 flex flex-wrap gap-2 items-start">
+                <span class="px-2.5 py-1 rounded-full bg-white/[0.04] border border-dashed border-white/20 font-mono text-xs text-saturn-cream">Targeted Meta Ads</span>
+                <span class="px-2.5 py-1 rounded-full bg-white/[0.04] border border-dashed border-white/20 font-mono text-xs text-saturn-cream">High Intent Leads</span>
+                <span class="px-2.5 py-1 rounded-full bg-white/[0.04] border border-dashed border-white/20 font-mono text-xs text-saturn-cream">Direct ROI Tracking</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 03 Social Media Management -->
+        <div class="service-row group py-5 sm:py-7 cursor-pointer transition-all duration-300" onclick="toggleService(this)">
+          <div class="flex items-center justify-between">
+            <div class="flex items-center gap-4 sm:gap-8">
+              <span class="font-mono text-xs sm:text-sm text-saturn-muted group-hover:text-saturn-green transition-colors">03</span>
+              <h3 class="text-base sm:text-xl lg:text-2xl xl:text-3xl font-syne font-bold uppercase tracking-tight text-saturn-cream group-hover:text-saturn-green transition-colors" data-i18n="srv-3-t">Social Media Management</h3>
+            </div>
+            <div class="flex items-center gap-4">
+              <span class="hidden md:inline-block font-mono text-[11px] text-saturn-muted uppercase tracking-wider" data-i18n="srv-3-pill">Content ◆ Short-Form Video ◆ Category Authority</span>
+              <span class="srv-icon font-mono text-base sm:text-lg text-saturn-green transition-transform duration-300">＋</span>
+            </div>
+          </div>
+          <div class="srv-detail max-h-0 overflow-hidden transition-all duration-500 ease-in-out">
+            <div class="pt-5 pl-8 sm:pl-16 pr-2 sm:pr-4 grid grid-cols-1 md:grid-cols-12 gap-5 text-saturn-muted text-xs sm:text-sm lg:text-base leading-relaxed">
+              <p class="md:col-span-8 font-normal" data-i18n="srv-3-d">Consistent, high-quality content production and brand positioning that builds unquestioned authority, establishes client trust, and keeps your company top-of-mind.</p>
+              <div class="md:col-span-4 flex flex-wrap gap-2 items-start">
+                <span class="px-2.5 py-1 rounded-full bg-white/[0.04] border border-dashed border-white/20 font-mono text-xs text-saturn-cream">Short-form Video</span>
+                <span class="px-2.5 py-1 rounded-full bg-white/[0.04] border border-dashed border-white/20 font-mono text-xs text-saturn-cream">Executive Narrative</span>
+                <span class="px-2.5 py-1 rounded-full bg-white/[0.04] border border-dashed border-white/20 font-mono text-xs text-saturn-cream">Community Growth</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 04 AI & Chat Assistants -->
+        <div class="service-row group py-5 sm:py-7 cursor-pointer transition-all duration-300" onclick="toggleService(this)">
+          <div class="flex items-center justify-between">
+            <div class="flex items-center gap-4 sm:gap-8">
+              <span class="font-mono text-xs sm:text-sm text-saturn-muted group-hover:text-saturn-green transition-colors">04</span>
+              <h3 class="text-base sm:text-xl lg:text-2xl xl:text-3xl font-syne font-bold uppercase tracking-tight text-saturn-cream group-hover:text-saturn-green transition-colors" data-i18n="srv-4-t">AI & Chat Assistants</h3>
+            </div>
+            <div class="flex items-center gap-4">
+              <span class="hidden md:inline-block font-mono text-[11px] text-saturn-muted uppercase tracking-wider" data-i18n="srv-4-pill">24/7 WhatsApp API ◆ Instant Response ◆ Zero Lag</span>
+              <span class="srv-icon font-mono text-base sm:text-lg text-saturn-green transition-transform duration-300">＋</span>
+            </div>
+          </div>
+          <div class="srv-detail max-h-0 overflow-hidden transition-all duration-500 ease-in-out">
+            <div class="pt-5 pl-8 sm:pl-16 pr-2 sm:pr-4 grid grid-cols-1 md:grid-cols-12 gap-5 text-saturn-muted text-xs sm:text-sm lg:text-base leading-relaxed">
+              <p class="md:col-span-8 font-normal" data-i18n="srv-4-d">Smart WhatsApp and website bots that answer enquiries in under 5 seconds, capture customer contact info, qualify requests, and pass warm leads directly to your sales team.</p>
+              <div class="md:col-span-4 flex flex-wrap gap-2 items-start">
+                <span class="px-2.5 py-1 rounded-full bg-white/[0.04] border border-dashed border-white/20 font-mono text-xs text-saturn-cream">WhatsApp API</span>
+                <span class="px-2.5 py-1 rounded-full bg-white/[0.04] border border-dashed border-white/20 font-mono text-xs text-saturn-cream">CRM Auto-Sync</span>
+                <span class="px-2.5 py-1 rounded-full bg-white/[0.04] border border-dashed border-white/20 font-mono text-xs text-saturn-cream">24/7 Lead Capture</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 05 Voice & Calling Systems -->
+        <div class="service-row group py-5 sm:py-7 cursor-pointer transition-all duration-300" onclick="toggleService(this)">
+          <div class="flex items-center justify-between">
+            <div class="flex items-center gap-4 sm:gap-8">
+              <span class="font-mono text-xs sm:text-sm text-saturn-muted group-hover:text-saturn-green transition-colors">05</span>
+              <h3 class="text-base sm:text-xl lg:text-2xl xl:text-3xl font-syne font-bold uppercase tracking-tight text-saturn-cream group-hover:text-saturn-green transition-colors" data-i18n="srv-5-t">Voice & Calling Systems</h3>
+            </div>
+            <div class="flex items-center gap-4">
+              <span class="hidden md:inline-block font-mono text-[11px] text-saturn-muted uppercase tracking-wider" data-i18n="srv-5-pill">Zero Missed Calls ◆ Smart IVR ◆ Auto Reminders</span>
+              <span class="srv-icon font-mono text-base sm:text-lg text-saturn-green transition-transform duration-300">＋</span>
+            </div>
+          </div>
+          <div class="srv-detail max-h-0 overflow-hidden transition-all duration-500 ease-in-out">
+            <div class="pt-5 pl-8 sm:pl-16 pr-2 sm:pr-4 grid grid-cols-1 md:grid-cols-12 gap-5 text-saturn-muted text-xs sm:text-sm lg:text-base leading-relaxed">
+              <p class="md:col-span-8 font-normal" data-i18n="srv-5-d">Automated phone systems and voice bots that ensure zero missed calls, handle routine customer questions, schedule meetings on your calendar, and send automatic follow-up reminders.</p>
+              <div class="md:col-span-4 flex flex-wrap gap-2 items-start">
+                <span class="px-2.5 py-1 rounded-full bg-white/[0.04] border border-dashed border-white/20 font-mono text-xs text-saturn-cream">AI Telephony</span>
+                <span class="px-2.5 py-1 rounded-full bg-white/[0.04] border border-dashed border-white/20 font-mono text-xs text-saturn-cream">Calendar Auto-Book</span>
+                <span class="px-2.5 py-1 rounded-full bg-white/[0.04] border border-dashed border-white/20 font-mono text-xs text-saturn-cream">Smart Routing</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 06 Custom Apps & Software -->
+        <div class="service-row group py-5 sm:py-7 cursor-pointer transition-all duration-300" onclick="toggleService(this)">
+          <div class="flex items-center justify-between">
+            <div class="flex items-center gap-4 sm:gap-8">
+              <span class="font-mono text-xs sm:text-sm text-saturn-muted group-hover:text-saturn-green transition-colors">06</span>
+              <h3 class="text-base sm:text-xl lg:text-2xl xl:text-3xl font-syne font-bold uppercase tracking-tight text-saturn-cream group-hover:text-saturn-green transition-colors" data-i18n="srv-6-t">Custom Apps & Software</h3>
+            </div>
+            <div class="flex items-center gap-4">
+              <span class="hidden md:inline-block font-mono text-[11px] text-saturn-muted uppercase tracking-wider" data-i18n="srv-6-pill">Bespoke CRMs ◆ Client Portals ◆ Internal Tools</span>
+              <span class="srv-icon font-mono text-base sm:text-lg text-saturn-green transition-transform duration-300">＋</span>
+            </div>
+          </div>
+          <div class="srv-detail max-h-0 overflow-hidden transition-all duration-500 ease-in-out">
+            <div class="pt-5 pl-8 sm:pl-16 pr-2 sm:pr-4 grid grid-cols-1 md:grid-cols-12 gap-5 text-saturn-muted text-xs sm:text-sm lg:text-base leading-relaxed">
+              <p class="md:col-span-8 font-normal" data-i18n="srv-6-d">Software built around how you actually work — custom customer portals, quotation engines, internal tracking dashboards, and management apps that off-the-shelf software can't provide.</p>
+              <div class="md:col-span-4 flex flex-wrap gap-2 items-start">
+                <span class="px-2.5 py-1 rounded-full bg-white/[0.04] border border-dashed border-white/20 font-mono text-xs text-saturn-cream">No Per-Seat Cost</span>
+                <span class="px-2.5 py-1 rounded-full bg-white/[0.04] border border-dashed border-white/20 font-mono text-xs text-saturn-cream">Tailor-Made UI</span>
+                <span class="px-2.5 py-1 rounded-full bg-white/[0.04] border border-dashed border-white/20 font-mono text-xs text-saturn-cream">Full IP Ownership</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 07 Business Automation -->
+        <div class="service-row group py-5 sm:py-7 cursor-pointer transition-all duration-300" onclick="toggleService(this)">
+          <div class="flex items-center justify-between">
+            <div class="flex items-center gap-4 sm:gap-8">
+              <span class="font-mono text-xs sm:text-sm text-saturn-muted group-hover:text-saturn-green transition-colors">07</span>
+              <h3 class="text-base sm:text-xl lg:text-2xl xl:text-3xl font-syne font-bold uppercase tracking-tight text-saturn-cream group-hover:text-saturn-green transition-colors" data-i18n="srv-7-t">Business Automation</h3>
+            </div>
+            <div class="flex items-center gap-4">
+              <span class="hidden md:inline-block font-mono text-[11px] text-saturn-muted uppercase tracking-wider" data-i18n="srv-7-pill">Make / Webhooks ◆ Seamless Sync ◆ 0 Manual Work</span>
+              <span class="srv-icon font-mono text-base sm:text-lg text-saturn-green transition-transform duration-300">＋</span>
+            </div>
+          </div>
+          <div class="srv-detail max-h-0 overflow-hidden transition-all duration-500 ease-in-out">
+            <div class="pt-5 pl-8 sm:pl-16 pr-2 sm:pr-4 grid grid-cols-1 md:grid-cols-12 gap-5 text-saturn-muted text-xs sm:text-sm lg:text-base leading-relaxed">
+              <p class="md:col-span-8 font-normal" data-i18n="srv-7-d">Connect your tools together. Invoices that send themselves, contracts auto-generated upon payment, and notification systems that update your team instantly with zero manual intervention.</p>
+              <div class="md:col-span-4 flex flex-wrap gap-2 items-start">
+                <span class="px-2.5 py-1 rounded-full bg-white/[0.04] border border-dashed border-white/20 font-mono text-xs text-saturn-cream">Automated Billing</span>
+                <span class="px-2.5 py-1 rounded-full bg-white/[0.04] border border-dashed border-white/20 font-mono text-xs text-saturn-cream">Pipeline Triggering</span>
+                <span class="px-2.5 py-1 rounded-full bg-white/[0.04] border border-dashed border-white/20 font-mono text-xs text-saturn-cream">Zero Human Error</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 08 AI-Powered Business Systems -->
+        <div class="service-row group py-5 sm:py-7 cursor-pointer transition-all duration-300" onclick="toggleService(this)">
+          <div class="flex items-center justify-between">
+            <div class="flex items-center gap-4 sm:gap-8">
+              <span class="font-mono text-xs sm:text-sm text-saturn-muted group-hover:text-saturn-green transition-colors">08</span>
+              <h3 class="text-base sm:text-xl lg:text-2xl xl:text-3xl font-syne font-bold uppercase tracking-tight text-saturn-cream group-hover:text-saturn-green transition-colors" data-i18n="srv-8-t">AI-Powered Business Systems</h3>
+            </div>
+            <div class="flex items-center gap-4">
+              <span class="hidden md:inline-block font-mono text-[11px] text-saturn-muted uppercase tracking-wider" data-i18n="srv-8-pill">Intelligent Workflows ◆ Document AI ◆ Telemetry</span>
+              <span class="srv-icon font-mono text-base sm:text-lg text-saturn-green transition-transform duration-300">＋</span>
+            </div>
+          </div>
+          <div class="srv-detail max-h-0 overflow-hidden transition-all duration-500 ease-in-out">
+            <div class="pt-5 pl-8 sm:pl-16 pr-2 sm:pr-4 grid grid-cols-1 md:grid-cols-12 gap-5 text-saturn-muted text-xs sm:text-sm lg:text-base leading-relaxed">
+              <p class="md:col-span-8 font-normal" data-i18n="srv-8-d">Integrating modern AI models into daily operations: document scanning, customer categorization, intelligent routing, and predictive business recommendations designed for operational efficiency.</p>
+              <div class="md:col-span-4 flex flex-wrap gap-2 items-start">
+                <span class="px-2.5 py-1 rounded-full bg-white/[0.04] border border-dashed border-white/20 font-mono text-xs text-saturn-cream">Document Parsing</span>
+                <span class="px-2.5 py-1 rounded-full bg-white/[0.04] border border-dashed border-white/20 font-mono text-xs text-saturn-cream">Smart Routing</span>
+                <span class="px-2.5 py-1 rounded-full bg-white/[0.04] border border-dashed border-white/20 font-mono text-xs text-saturn-cream">Predictive Dashboards</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 09 Growth Consultancy -->
+        <div class="service-row group py-5 sm:py-7 cursor-pointer transition-all duration-300" onclick="toggleService(this)">
+          <div class="flex items-center justify-between">
+            <div class="flex items-center gap-4 sm:gap-8">
+              <span class="font-mono text-xs sm:text-sm text-saturn-muted group-hover:text-saturn-green transition-colors">09</span>
+              <h3 class="text-base sm:text-xl lg:text-2xl xl:text-3xl font-syne font-bold uppercase tracking-tight text-saturn-cream group-hover:text-saturn-green transition-colors" data-i18n="srv-9-t">Growth Consultancy</h3>
+            </div>
+            <div class="flex items-center gap-4">
+              <span class="hidden md:inline-block font-mono text-[11px] text-saturn-muted uppercase tracking-wider" data-i18n="srv-9-pill">Fractional CTO ◆ Tech Strategy ◆ Roadmap</span>
+              <span class="srv-icon font-mono text-base sm:text-lg text-saturn-green transition-transform duration-300">＋</span>
+            </div>
+          </div>
+          <div class="srv-detail max-h-0 overflow-hidden transition-all duration-500 ease-in-out">
+            <div class="pt-5 pl-8 sm:pl-16 pr-2 sm:pr-4 grid grid-cols-1 md:grid-cols-12 gap-5 text-saturn-muted text-xs sm:text-sm lg:text-base leading-relaxed">
+              <p class="md:col-span-8 font-normal" data-i18n="srv-9-d">Strategic technology advice from someone who understands commercial business reality. We audit existing systems, identify high-leverage growth levers, and chart the cleanest route forward.</p>
+              <div class="md:col-span-4 flex flex-wrap gap-2 items-start">
+                <span class="px-2.5 py-1 rounded-full bg-white/[0.04] border border-dashed border-white/20 font-mono text-xs text-saturn-cream">Systems Audit</span>
+                <span class="px-2.5 py-1 rounded-full bg-white/[0.04] border border-dashed border-white/20 font-mono text-xs text-saturn-cream">Fractional CTO</span>
+                <span class="px-2.5 py-1 rounded-full bg-white/[0.04] border border-dashed border-white/20 font-mono text-xs text-saturn-cream">Scale Blueprint</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Signature Commitment Callout Banner (Embroidered Stitched Luxury Glass Box) -->
+      <div class="mt-12 sm:mt-16 p-6 sm:p-10 lg:p-14 rounded-3xl glass-card relative overflow-hidden flex flex-col md:flex-row items-start md:items-center justify-between gap-6 sm:gap-8">
+        <div class="max-w-3xl">
+          <div class="font-mono text-[10px] sm:text-[11px] text-saturn-green uppercase tracking-[0.2em] mb-2 sm:mb-3" data-i18n="banner-tag">◆ SIGNATURE COMMITMENT</div>
+          <h3 class="text-xl sm:text-3xl lg:text-4xl font-syne font-extrabold text-white tracking-tight uppercase leading-[1.14]" data-i18n="banner-statement">
+            "Your problem doesn't have to fit our products. <br>
+            <span class="font-serif-accent text-saturn-green lowercase text-2xl sm:text-4xl lg:text-5xl block mt-1 tracking-normal shiny-text-green">Our solution has to fit your problem."</span>
+          </h3>
+          <p class="text-xs sm:text-sm lg:text-base text-saturn-muted mt-3 sm:mt-4 font-normal max-w-2xl leading-relaxed" data-i18n="banner-desc">
+            If what you need is not in the list above, that is exactly where we do our best work. We study the problem, map the solution, and build what is required.
+          </p>
+        </div>
+        <a class="btn-embroidered-primary shrink-0 px-6 sm:px-8 py-3.5 sm:py-4 rounded-full text-xs uppercase tracking-wider" href="#contact">
+          <span data-i18n="banner-btn">Custom Build Enquiry →</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 5: BUILT FOR BUSINESSES THAT WANT TO GROW (TARGET VERTICALS) -->
+  <section class="py-20 sm:py-28 lg:py-32 px-4 sm:px-8 lg:px-12 xl:px-14 max-w-[1600px] mx-auto reveal-elem active" id="verticals">
+    <div class="flex items-center justify-between border-b border-dashed border-white/15 pb-5 mb-10 sm:mb-14">
+      <span class="font-mono text-[10px] sm:text-[11px] tracking-[0.2em] text-saturn-muted uppercase" data-i18n="vert-tag">[ TARGET SECTORS // 05 ]</span>
+      <span class="font-mono text-[10px] sm:text-[11px] tracking-[0.2em] text-saturn-green font-bold" data-i18n="vert-who">WHO WE SERVE</span>
+    </div>
+
+    <div class="mb-10 sm:mb-14">
+      <h2 class="text-2xl sm:text-4xl lg:text-5xl xl:text-6xl font-syne font-extrabold uppercase tracking-tight text-white leading-tight" data-i18n="vert-h2">
+        BUILT FOR BUSINESSES <br>
+        <span class="font-serif-accent text-saturn-green lowercase text-3xl sm:text-5xl lg:text-6xl xl:text-7xl shiny-text-green">that want to grow</span>
+      </h2>
+      <p class="text-sm sm:text-base lg:text-lg text-saturn-muted mt-4 max-w-2xl font-normal leading-relaxed" data-i18n="vert-sub">
+        We work with businesses of all sizes and across industries. You don't need to be a technology company — you just need an ambition to grow.
+      </p>
+    </div>
+
+    <!-- The 5 Exact Categories in Stitched Glass Cards -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6">
+      <!-- 1. Schools & Educational Institutions -->
+      <div class="p-6 sm:p-8 rounded-2xl glass-card group hover:translate-y-[-4px] transition-all">
+        <div class="font-mono text-[10px] sm:text-[11px] text-saturn-green uppercase mb-2 sm:mb-3 tracking-[0.16em] font-bold" data-i18n="v1-num">01 // ADMISSIONS & EDUCATION</div>
+        <h3 class="text-lg sm:text-xl font-syne font-bold uppercase text-white mb-2 sm:mb-3" data-i18n="v1-t">Schools & Educational Institutions</h3>
+        <p class="text-xs sm:text-sm text-saturn-muted mb-5 sm:mb-6 leading-relaxed font-normal" data-i18n="v1-d">More admissions, automated parent inquiry bots, WhatsApp pipelines, and prestigious digital positioning.</p>
+        <div class="flex flex-wrap gap-2">
+          <span class="px-2.5 py-1 rounded-full bg-white/[0.04] font-mono text-[10px] sm:text-[11px] text-saturn-cream border border-dashed border-white/20" data-i18n="v1-tag1">Parent Inquiry Bots</span>
+          <span class="px-2.5 py-1 rounded-full bg-white/[0.04] font-mono text-[10px] sm:text-[11px] text-saturn-cream border border-dashed border-white/20" data-i18n="v1-tag2">Admissions CRM</span>
+        </div>
+      </div>
+
+      <!-- 2. Real Estate Businesses -->
+      <div class="p-6 sm:p-8 rounded-2xl glass-card group hover:translate-y-[-4px] transition-all">
+        <div class="font-mono text-[10px] sm:text-[11px] text-saturn-green uppercase mb-2 sm:mb-3 tracking-[0.16em] font-bold" data-i18n="v2-num">02 // PROPERTY & ASSETS</div>
+        <h3 class="text-lg sm:text-xl font-syne font-bold uppercase text-white mb-2 sm:mb-3" data-i18n="v2-t">Real Estate Businesses</h3>
+        <p class="text-xs sm:text-sm text-saturn-muted mb-5 sm:mb-6 leading-relaxed font-normal" data-i18n="v2-d">Qualified buyer lead capture, automated site-visit calendar sync, property inquiry dispatchers, and CRM tracking.</p>
+        <div class="flex flex-wrap gap-2">
+          <span class="px-2.5 py-1 rounded-full bg-white/[0.04] font-mono text-[10px] sm:text-[11px] text-saturn-cream border border-dashed border-white/20" data-i18n="v2-tag1">Tour Booking</span>
+          <span class="px-2.5 py-1 rounded-full bg-white/[0.04] font-mono text-[10px] sm:text-[11px] text-saturn-cream border border-dashed border-white/20" data-i18n="v2-tag2">High-Value Ads</span>
+        </div>
+      </div>
+
+      <!-- 3. Franchise Owners -->
+      <div class="p-6 sm:p-8 rounded-2xl glass-card group hover:translate-y-[-4px] transition-all">
+        <div class="font-mono text-[10px] sm:text-[11px] text-saturn-green uppercase mb-2 sm:mb-3 tracking-[0.16em] font-bold" data-i18n="v3-num">03 // MULTI-LOCATION</div>
+        <h3 class="text-lg sm:text-xl font-syne font-bold uppercase text-white mb-2 sm:mb-3" data-i18n="v3-t">Franchise Owners</h3>
+        <p class="text-xs sm:text-sm text-saturn-muted mb-5 sm:mb-6 leading-relaxed font-normal" data-i18n="v3-d">Standardized lead capture, localized marketing playbooks, and unified multi-location dashboard management.</p>
+        <div class="flex flex-wrap gap-2">
+          <span class="px-2.5 py-1 rounded-full bg-white/[0.04] font-mono text-[10px] sm:text-[11px] text-saturn-cream border border-dashed border-white/20" data-i18n="v3-tag1">Centralized KPI Hub</span>
+          <span class="px-2.5 py-1 rounded-full bg-white/[0.04] font-mono text-[10px] sm:text-[11px] text-saturn-cream border border-dashed border-white/20" data-i18n="v3-tag2">Brand Uniformity</span>
+        </div>
+      </div>
+
+      <!-- 4. Founders & Growing Companies -->
+      <div class="p-6 sm:p-8 rounded-2xl glass-card group hover:translate-y-[-4px] transition-all">
+        <div class="font-mono text-[10px] sm:text-[11px] text-saturn-green uppercase mb-2 sm:mb-3 tracking-[0.16em] font-bold" data-i18n="v4-num">04 // FAST SCALING</div>
+        <h3 class="text-lg sm:text-xl font-syne font-bold uppercase text-white mb-2 sm:mb-3" data-i18n="v4-t">Founders & Growing Companies</h3>
+        <p class="text-xs sm:text-sm text-saturn-muted mb-5 sm:mb-6 leading-relaxed font-normal" data-i18n="v4-d">Complete digital ecosystems built fast from zero to scale without bloated engineering agency payroll.</p>
+        <div class="flex flex-wrap gap-2">
+          <span class="px-2.5 py-1 rounded-full bg-white/[0.04] font-mono text-[10px] sm:text-[11px] text-saturn-cream border border-dashed border-white/20" data-i18n="v4-tag1">Zero-to-Scale</span>
+          <span class="px-2.5 py-1 rounded-full bg-white/[0.04] font-mono text-[10px] sm:text-[11px] text-saturn-cream border border-dashed border-white/20" data-i18n="v4-tag2">Fractional Tech Team</span>
+        </div>
+      </div>
+
+      <!-- 5. Local & Established Businesses -->
+      <div class="p-6 sm:p-8 rounded-2xl glass-card group hover:translate-y-[-4px] transition-all sm:col-span-2 lg:col-span-2">
+        <div class="font-mono text-[10px] sm:text-[11px] text-saturn-green uppercase mb-2 sm:mb-3 tracking-[0.16em] font-bold" data-i18n="v5-num">05 // REINVENTION & MODERNIZATION</div>
+        <h3 class="text-lg sm:text-xl font-syne font-bold uppercase text-white mb-2 sm:mb-3" data-i18n="v5-t">Local & Established Businesses</h3>
+        <p class="text-xs sm:text-sm text-saturn-muted mb-5 sm:mb-6 leading-relaxed font-normal" data-i18n="v5-d">Modernize legacy client touchpoints, dominate local search, replace chaotic WhatsApp groups with integrated CRM automations, and eliminate administrative drag.</p>
+        <div class="flex flex-wrap gap-2">
+          <span class="px-2.5 py-1 rounded-full bg-white/[0.04] font-mono text-[10px] sm:text-[11px] text-saturn-cream border border-dashed border-white/20" data-i18n="v5-tag1">Legacy Upgrade</span>
+          <span class="px-2.5 py-1 rounded-full bg-white/[0.04] font-mono text-[10px] sm:text-[11px] text-saturn-cream border border-dashed border-white/20" data-i18n="v5-tag2">Local Search SEO</span>
+          <span class="px-2.5 py-1 rounded-full bg-white/[0.04] font-mono text-[10px] sm:text-[11px] text-saturn-cream border border-dashed border-white/20" data-i18n="v5-tag3">Ops Modernization</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Reassurance Callout -->
+    <div class="mt-6 sm:mt-8 p-5 sm:p-6 rounded-2xl glass-card text-center">
+      <p class="font-mono text-xs sm:text-sm text-saturn-cream/90" data-i18n="vert-note">
+        And when your industry is different, that is not a problem. <span class="text-saturn-green font-bold">We learn the business first.</span>
+      </p>
+    </div>
+  </section>
+
+  <!-- SECTION 6: OUR APPROACH (ID="APPROACH") -->
+  <section class="py-20 sm:py-28 lg:py-32 bg-black border-t border-dashed border-white/15 reveal-elem active" id="approach">
+    <div class="max-w-[1600px] mx-auto px-4 sm:px-8 lg:px-12 xl:px-14">
+      <div class="flex items-center justify-between border-b border-dashed border-white/15 pb-5 mb-10 sm:mb-14">
+        <span class="font-mono text-[10px] sm:text-[11px] tracking-[0.2em] text-saturn-muted uppercase" data-i18n="app-tag">[ HOW WE WORK // 06 ]</span>
+        <span class="font-mono text-[10px] sm:text-[11px] tracking-[0.2em] text-saturn-green font-bold" data-i18n="app-sub">5-STEP PROTOCOL</span>
+      </div>
+
+      <div class="mb-10 sm:mb-14">
+        <h2 class="text-2xl sm:text-4xl lg:text-5xl font-syne font-extrabold uppercase tracking-tight text-white leading-tight" data-i18n="app-h2">
+          OUR <span class="font-serif-accent text-saturn-green lowercase text-3xl sm:text-5xl lg:text-6xl shiny-text-green">approach</span>
+        </h2>
+      </div>
+
+      <!-- 5-Step Grid with Progress Architecture -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-5 sm:gap-6">
+        <!-- Step 1 -->
+        <div class="p-6 sm:p-8 rounded-2xl glass-card flex flex-col justify-between hover:translate-y-[-4px] transition-all">
+          <div>
+            <div class="font-syne font-extrabold text-2xl text-saturn-green mb-4 sm:mb-5">01</div>
+            <h4 class="text-base sm:text-lg font-syne font-bold uppercase text-white mb-2 tracking-tight" data-i18n="st-1-t">Understand</h4>
+            <p class="text-xs sm:text-sm text-saturn-muted leading-relaxed font-normal" data-i18n="st-1-d">We listen. We ask deep questions about your day-to-day operations, cash friction, and existing bottlenecks.</p>
+          </div>
+          <div class="mt-6 sm:mt-8 pt-4 border-t border-dashed border-white/15 font-mono text-[10px] text-saturn-muted uppercase tracking-[0.16em]" data-i18n="st-1-ph">
+            PHASE // AUDIT
+          </div>
+        </div>
+
+        <!-- Step 2 -->
+        <div class="p-6 sm:p-8 rounded-2xl glass-card flex flex-col justify-between hover:translate-y-[-4px] transition-all">
+          <div>
+            <div class="font-syne font-extrabold text-2xl text-saturn-green mb-4 sm:mb-5">02</div>
+            <h4 class="text-base sm:text-lg font-syne font-bold uppercase text-white mb-2 tracking-tight" data-i18n="st-2-t">Diagnose</h4>
+            <p class="text-xs sm:text-sm text-saturn-muted leading-relaxed font-normal" data-i18n="st-2-d">We pinpoint the exact issue. Is it visibility, qualification speed, trust deficit, or conversion follow-up?</p>
+          </div>
+          <div class="mt-6 sm:mt-8 pt-4 border-t border-dashed border-white/15 font-mono text-[10px] text-saturn-muted uppercase tracking-[0.16em]" data-i18n="st-2-ph">
+            PHASE // ROOT CAUSE
+          </div>
+        </div>
+
+        <!-- Step 3 -->
+        <div class="p-6 sm:p-8 rounded-2xl glass-card flex flex-col justify-between hover:translate-y-[-4px] transition-all">
+          <div>
+            <div class="font-syne font-extrabold text-2xl text-saturn-green mb-4 sm:mb-5">03</div>
+            <h4 class="text-base sm:text-lg font-syne font-bold uppercase text-white mb-2 tracking-tight" data-i18n="st-3-t">Design</h4>
+            <p class="text-xs sm:text-sm text-saturn-muted leading-relaxed font-normal" data-i18n="st-3-d">We propose the leanest, most effective solution. Nothing bloated, nothing unneeded—pure structural clarity.</p>
+          </div>
+          <div class="mt-6 sm:mt-8 pt-4 border-t border-dashed border-white/15 font-mono text-[10px] text-saturn-muted uppercase tracking-[0.16em]" data-i18n="st-3-ph">
+            PHASE // BLUEPRINT
+          </div>
+        </div>
+
+        <!-- Step 4 -->
+        <div class="p-6 sm:p-8 rounded-2xl glass-card flex flex-col justify-between hover:translate-y-[-4px] transition-all">
+          <div>
+            <div class="font-syne font-extrabold text-2xl text-saturn-green mb-4 sm:mb-5">04</div>
+            <h4 class="text-base sm:text-lg font-syne font-bold uppercase text-white mb-2 tracking-tight" data-i18n="st-4-t">Build</h4>
+            <p class="text-xs sm:text-sm text-saturn-muted leading-relaxed font-normal" data-i18n="st-4-d">We build, configure, test, and deploy fast. Clean code, rock-solid integrations, high aesthetic authority.</p>
+          </div>
+          <div class="mt-6 sm:mt-8 pt-4 border-t border-dashed border-white/15 font-mono text-[10px] text-saturn-muted uppercase tracking-[0.16em]" data-i18n="st-4-ph">
+            PHASE // PRODUCTION
+          </div>
+        </div>
+
+        <!-- Step 5 -->
+        <div class="p-6 sm:p-8 rounded-2xl glass-card flex flex-col justify-between hover:translate-y-[-4px] transition-all sm:col-span-2 lg:col-span-1">
+          <div>
+            <div class="font-syne font-extrabold text-2xl text-saturn-green mb-4 sm:mb-5">05</div>
+            <h4 class="text-base sm:text-lg font-syne font-bold uppercase text-white mb-2 tracking-tight" data-i18n="st-5-t">Grow</h4>
+            <p class="text-xs sm:text-sm text-saturn-muted leading-relaxed font-normal" data-i18n="st-5-d">We monitor outputs, refine conversion metrics, train your team, and support your continuous upward trajectory.</p>
+          </div>
+          <div class="mt-6 sm:mt-8 pt-4 border-t border-dashed border-white/15 font-mono text-[10px] text-saturn-muted uppercase tracking-[0.16em]" data-i18n="st-5-ph">
+            PHASE // EXPANSION
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 7: WHY SATURN? (6 CORE REASONS) -->
+  <section class="py-20 sm:py-28 lg:py-32 px-4 sm:px-8 lg:px-12 xl:px-14 max-w-[1600px] mx-auto reveal-elem active" id="why-saturn">
+    <div class="flex items-center justify-between border-b border-dashed border-white/15 pb-5 mb-10 sm:mb-14">
+      <span class="font-mono text-[10px] sm:text-[11px] tracking-[0.2em] text-saturn-muted uppercase" data-i18n="ws-tag">[ COMPETITIVE LEVERAGE // 07 ]</span>
+      <span class="font-mono text-[10px] sm:text-[11px] tracking-[0.2em] text-saturn-green font-bold">WHY SATURN</span>
+    </div>
+
+    <div class="mb-10 sm:mb-14">
+      <h2 class="text-2xl sm:text-4xl lg:text-5xl xl:text-6xl font-syne font-extrabold uppercase tracking-tight text-white leading-tight" data-i18n="ws-h2">
+        WHY <span class="font-serif-accent text-saturn-green lowercase text-3xl sm:text-5xl lg:text-6xl xl:text-7xl shiny-text-green">saturn?</span>
+      </h2>
+      <p class="text-sm sm:text-base lg:text-lg text-saturn-muted mt-3 sm:mt-4 max-w-2xl font-normal leading-relaxed" data-i18n="ws-sub">
+        We replace the friction of traditional bloated agencies with disciplined, outcome-first engineering.
+      </p>
+    </div>
+
+    <!-- 6 Core Reasons Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6">
+      <!-- 1 Faster -->
+      <div class="p-6 sm:p-8 rounded-2xl glass-card hover:translate-y-[-4px] transition-all">
+        <div class="w-9 sm:w-10 h-9 sm:h-10 rounded-full bg-white/[0.04] border border-dashed border-white/20 flex items-center justify-center font-mono text-saturn-green font-bold text-xs mb-4 sm:mb-5">01</div>
+        <h3 class="text-base sm:text-lg font-syne font-bold uppercase text-white mb-2 tracking-tight" data-i18n="ws-1-t">Faster</h3>
+        <p class="text-xs sm:text-sm text-saturn-muted leading-relaxed font-normal" data-i18n="ws-1-d">Rapid deployment cycles. We launch working systems in days and weeks rather than spending quarters inside endless slide decks.</p>
+      </div>
+
+      <!-- 2 Practical -->
+      <div class="p-6 sm:p-8 rounded-2xl glass-card hover:translate-y-[-4px] transition-all">
+        <div class="w-9 sm:w-10 h-9 sm:h-10 rounded-full bg-white/[0.04] border border-dashed border-white/20 flex items-center justify-center font-mono text-saturn-green font-bold text-xs mb-4 sm:mb-5">02</div>
+        <h3 class="text-base sm:text-lg font-syne font-bold uppercase text-white mb-2 tracking-tight" data-i18n="ws-2-t">Practical</h3>
+        <p class="text-xs sm:text-sm text-saturn-muted leading-relaxed font-normal" data-i18n="ws-2-d">No unnecessary technical jargon or vanity software tools. We only implement architectures that directly move commercial needles.</p>
+      </div>
+
+      <!-- 3 Cost-Effective -->
+      <div class="p-6 sm:p-8 rounded-2xl glass-card hover:translate-y-[-4px] transition-all">
+        <div class="w-9 sm:w-10 h-9 sm:h-10 rounded-full bg-white/[0.04] border border-dashed border-white/20 flex items-center justify-center font-mono text-saturn-green font-bold text-xs mb-4 sm:mb-5">03</div>
+        <h3 class="text-base sm:text-lg font-syne font-bold uppercase text-white mb-2 tracking-tight" data-i18n="ws-3-t">Cost-Effective</h3>
+        <p class="text-xs sm:text-sm text-saturn-muted leading-relaxed font-normal" data-i18n="ws-3-d">Fraction of the cost of building an in-house engineering squad or retaining multiple disjointed marketing and tech agencies.</p>
+      </div>
+
+      <!-- 4 High Quality -->
+      <div class="p-6 sm:p-8 rounded-2xl glass-card hover:translate-y-[-4px] transition-all">
+        <div class="w-9 sm:w-10 h-9 sm:h-10 rounded-full bg-white/[0.04] border border-dashed border-white/20 flex items-center justify-center font-mono text-saturn-green font-bold text-xs mb-4 sm:mb-5">04</div>
+        <h3 class="text-base sm:text-lg font-syne font-bold uppercase text-white mb-2 tracking-tight" data-i18n="ws-4-t">High Quality</h3>
+        <p class="text-xs sm:text-sm text-saturn-muted leading-relaxed font-normal" data-i18n="ws-4-d">Elite digital craft with precision engineering, clean codebase integrity, sub-second response times, and supreme aesthetic authority.</p>
+      </div>
+
+      <!-- 5 End-to-End Support -->
+      <div class="p-6 sm:p-8 rounded-2xl glass-card hover:translate-y-[-4px] transition-all">
+        <div class="w-9 sm:w-10 h-9 sm:h-10 rounded-full bg-white/[0.04] border border-dashed border-white/20 flex items-center justify-center font-mono text-saturn-green font-bold text-xs mb-4 sm:mb-5">05</div>
+        <h3 class="text-base sm:text-lg font-syne font-bold uppercase text-white mb-2 tracking-tight" data-i18n="ws-5-t">End-to-End Support</h3>
+        <p class="text-xs sm:text-sm text-saturn-muted leading-relaxed font-normal" data-i18n="ws-5-d">We don't vanish after project launch. We train your staff, monitor daily operations, and actively support your ongoing expansion.</p>
+      </div>
+
+      <!-- 6 One Partner. Multiple Solutions. -->
+      <div class="p-6 sm:p-8 rounded-2xl glass-card hover:translate-y-[-4px] transition-all">
+        <div class="w-9 sm:w-10 h-9 sm:h-10 rounded-full bg-white/[0.04] border border-dashed border-white/20 flex items-center justify-center font-mono text-saturn-green font-bold text-xs mb-4 sm:mb-5">06</div>
+        <h3 class="text-base sm:text-lg font-syne font-bold uppercase text-white mb-2 tracking-tight" data-i18n="ws-6-t">One Partner. Multiple Solutions.</h3>
+        <p class="text-xs sm:text-sm text-saturn-muted leading-relaxed font-normal" data-i18n="ws-6-d">From web presence and ad campaigns to automated telephony and custom internal portals—all unified under one technical partner.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 8: BUSINESS OUTCOMES (ID="OUTCOMES") -->
+  <section class="py-20 sm:py-28 lg:py-32 bg-black border-t border-dashed border-white/15 relative overflow-hidden reveal-elem active" id="outcomes">
+    <div class="max-w-[1600px] mx-auto px-4 sm:px-8 lg:px-12 xl:px-14">
+      <div class="flex items-center justify-between border-b border-dashed border-white/15 pb-5 mb-10 sm:mb-14">
+        <span class="font-mono text-[10px] sm:text-[11px] tracking-[0.2em] text-saturn-muted uppercase" data-i18n="outcomes-tag">[ THE PROMISE // 08 ]</span>
+        <span class="font-mono text-[10px] sm:text-[11px] tracking-[0.2em] text-saturn-green font-bold">REAL IMPACT</span>
+      </div>
+
+      <h2 class="text-2xl sm:text-4xl lg:text-5xl xl:text-6xl font-syne font-extrabold uppercase tracking-tight text-white mb-10 sm:mb-14 max-w-5xl leading-[1.08]" data-i18n="outcomes-headline">
+        WE DON'T JUST BUILD THINGS. <br>
+        <span class="font-serif-accent text-saturn-green lowercase text-3xl sm:text-5xl lg:text-6xl xl:text-7xl block mt-1 shiny-text-green">we build business outcomes.</span>
+      </h2>
+
+      <!-- The 6 Outcome Metric Cards (Embroidered Glass Texture) -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6">
+        <div class="p-6 sm:p-8 rounded-2xl glass-card hover:translate-y-[-4px] transition-all flex flex-col justify-between min-h-48 group">
+          <div class="font-mono text-[10px] sm:text-[11px] text-saturn-muted tracking-[0.16em]">METRIC // 01</div>
+          <div class="text-xl sm:text-2xl lg:text-3xl font-syne font-extrabold text-white tracking-tight uppercase group-hover:text-saturn-green transition-colors leading-tight" data-i18n="out-1">MORE ENQUIRIES</div>
+          <div class="font-mono text-[10px] sm:text-[11px] text-saturn-dim" data-i18n="out-1-sub">Frictionless discovery funnel</div>
+        </div>
+
+        <div class="p-6 sm:p-8 rounded-2xl glass-card hover:translate-y-[-4px] transition-all flex flex-col justify-between min-h-48 group">
+          <div class="font-mono text-[10px] sm:text-[11px] text-saturn-muted tracking-[0.16em]">METRIC // 02</div>
+          <div class="text-xl sm:text-2xl lg:text-3xl font-syne font-extrabold text-white tracking-tight uppercase group-hover:text-saturn-green transition-colors leading-tight" data-i18n="out-2">MORE CUSTOMERS</div>
+          <div class="font-mono text-[10px] sm:text-[11px] text-saturn-dim" data-i18n="out-2-sub">Immediate trust conversion</div>
+        </div>
+
+        <div class="p-6 sm:p-8 rounded-2xl glass-card hover:translate-y-[-4px] transition-all flex flex-col justify-between min-h-48 group">
+          <div class="font-mono text-[10px] sm:text-[11px] text-saturn-muted tracking-[0.16em]">METRIC // 03</div>
+          <div class="text-xl sm:text-2xl lg:text-3xl font-syne font-extrabold text-white tracking-tight uppercase group-hover:text-saturn-green transition-colors leading-tight" data-i18n="out-3">MORE SALES</div>
+          <div class="font-mono text-[10px] sm:text-[11px] text-saturn-dim" data-i18n="out-3-sub">Automated pipeline velocity</div>
+        </div>
+
+        <div class="p-6 sm:p-8 rounded-2xl glass-card hover:translate-y-[-4px] transition-all flex flex-col justify-between min-h-48 group">
+          <div class="font-mono text-[10px] sm:text-[11px] text-saturn-muted tracking-[0.16em]">METRIC // 04</div>
+          <div class="text-xl sm:text-2xl lg:text-3xl font-syne font-extrabold text-white tracking-tight uppercase group-hover:text-saturn-green transition-colors leading-tight" data-i18n="out-4">LESS WASTED TIME</div>
+          <div class="font-mono text-[10px] sm:text-[11px] text-saturn-dim" data-i18n="out-4-sub">Autonomous operations</div>
+        </div>
+
+        <div class="p-6 sm:p-8 rounded-2xl glass-card hover:translate-y-[-4px] transition-all flex flex-col justify-between min-h-48 group">
+          <div class="font-mono text-[10px] sm:text-[11px] text-saturn-muted tracking-[0.16em]">METRIC // 05</div>
+          <div class="text-xl sm:text-2xl lg:text-3xl font-syne font-extrabold text-white tracking-tight uppercase group-hover:text-saturn-green transition-colors leading-tight" data-i18n="out-5">BETTER OPERATIONS</div>
+          <div class="font-mono text-[10px] sm:text-[11px] text-saturn-dim" data-i18n="out-5-sub">Zero human lag or leakage</div>
+        </div>
+
+        <div class="p-6 sm:p-8 rounded-2xl glass-card hover:translate-y-[-4px] transition-all flex flex-col justify-between min-h-48 group">
+          <div class="font-mono text-[10px] sm:text-[11px] text-saturn-muted tracking-[0.16em]">METRIC // 06</div>
+          <div class="text-xl sm:text-2xl lg:text-3xl font-syne font-extrabold text-white tracking-tight uppercase group-hover:text-saturn-green transition-colors leading-tight" data-i18n="out-6">HIGHER REVENUE</div>
+          <div class="font-mono text-[10px] sm:text-[11px] text-saturn-dim" data-i18n="out-6-sub">Predictable compounding scale</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 9: SECOND RUNNING MARQUEE STRIP -->
+  <div class="w-full bg-[#08090b] border-y border-dashed border-white/15 overflow-hidden py-3 sm:py-4 select-none">
+    <div class="flex whitespace-nowrap animate-marquee-slow items-center text-xs font-mono tracking-[0.2em] text-saturn-muted uppercase">
+      <span class="mx-6 text-saturn-cream">CLARITY OVER NOISE</span>
+      <span class="text-saturn-green text-[10px]">◆</span>
+      <span class="mx-6 text-saturn-cream">SYSTEMS OVER TRENDS</span>
+      <span class="text-saturn-green text-[10px]">◆</span>
+      <span class="mx-6 text-saturn-cream">OUTCOMES OVER BUZZWORDS</span>
+      <span class="text-saturn-green text-[10px]">◆</span>
+      <span class="mx-6 text-saturn-cream">CRAFT THAT LASTS</span>
+      <span class="text-saturn-green text-[10px]">◆</span>
+      <span class="mx-6 text-saturn-green font-bold">SATURN GROWTH SYSTEMS</span>
+      <span class="text-saturn-green text-[10px]">◆</span>
+      <span class="mx-6 text-saturn-cream">CLARITY OVER NOISE</span>
+      <span class="text-saturn-green text-[10px]">◆</span>
+      <span class="mx-6 text-saturn-cream">SYSTEMS OVER TRENDS</span>
+      <span class="text-saturn-green text-[10px]">◆</span>
+      <span class="mx-6 text-saturn-cream">OUTCOMES OVER BUZZWORDS</span>
+      <span class="text-saturn-green text-[10px]">◆</span>
+      <span class="mx-6 text-saturn-cream">CRAFT THAT LASTS</span>
+      <span class="text-saturn-green text-[10px]">◆</span>
+      <span class="mx-6 text-saturn-green font-bold">SATURN GROWTH SYSTEMS</span>
+      <span class="text-saturn-green text-[10px]">◆</span>
+    </div>
+  </div>
+
+  <!-- SECTION 10: REDESIGNED FORM ('LET'S FIND WHAT'S HOLDING YOUR BUSINESS BACK') -->
+  <section class="py-20 sm:py-28 lg:py-32 px-4 sm:px-8 lg:px-12 xl:px-14 max-w-[1600px] mx-auto reveal-elem active" id="contact">
+    <div class="flex items-center justify-between border-b border-dashed border-white/15 pb-5 mb-10 sm:mb-14">
+      <span class="font-mono text-[10px] sm:text-[11px] tracking-[0.2em] text-saturn-muted uppercase" data-i18n="contact-tag">[ INQUIRY CONSOLE // 10 ]</span>
+      <span class="font-mono text-[10px] sm:text-[11px] tracking-[0.2em] text-saturn-green font-bold" data-i18n="contact-desk">PROJECT DESK</span>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16">
+      <!-- Left Column: Strategic Pitch & Direct Contact -->
+      <div class="lg:col-span-5 space-y-6 sm:space-y-8">
+        <div>
+          <h2 class="text-2xl sm:text-4xl lg:text-5xl xl:text-6xl font-syne font-extrabold uppercase tracking-tight text-white leading-[1.10]" data-i18n="final-h2">
+            LET'S FIND WHAT'S <br>
+            <span class="font-serif-accent text-saturn-green lowercase text-3xl sm:text-5xl lg:text-6xl block mt-1 shiny-text-green">holding your business back.</span>
+          </h2>
+          <p class="text-sm sm:text-base lg:text-lg text-saturn-muted mt-4 sm:mt-6 leading-relaxed font-normal" data-i18n="final-sub">
+            Tell us about your business, your current challenges and where you want to go. We'll help you identify where the biggest opportunities are and what can be done about them.
+          </p>
+
+          <!-- Core Motto Box -->
+          <div class="mt-6 sm:mt-8 p-5 sm:p-6 rounded-2xl glass-card">
+            <span class="font-mono text-[10px] sm:text-[11px] text-saturn-green font-bold block mb-2 tracking-[0.16em]">SATURN GROWTH SYSTEMS</span>
+            <p class="font-syne text-sm sm:text-base lg:text-lg font-bold text-saturn-cream leading-snug" data-i18n="motto-box">
+              Understand the problem.<br>
+              Build the solution.<br>
+              Create the growth.
+            </p>
+          </div>
+        </div>
+
+        <!-- Studio Contact Coordinates -->
+        <div class="space-y-3 sm:space-y-4 pt-2">
+          <div class="p-5 sm:p-6 rounded-2xl glass-card flex items-center justify-between group">
+            <div>
+              <p class="font-mono text-[10px] text-saturn-muted uppercase tracking-[0.18em]" data-i18n="coord-inquiry-title">DIRECT INQUIRY DESK</p>
+              <p class="text-sm sm:text-base font-bold text-white mt-1">info@saturngrowth.com</p>
+            </div>
+            <a class="text-saturn-green text-lg group-hover:scale-125 transition-transform" href="mailto:info@saturngrowth.com">↗</a>
+          </div>
+          <div class="p-5 sm:p-6 rounded-2xl glass-card flex items-center justify-between">
+            <div>
+              <p class="font-mono text-[10px] text-saturn-muted uppercase tracking-[0.18em]" data-i18n="coord-audit-title">DISCOVERY PROTOCOL</p>
+              <p class="text-sm sm:text-base font-bold text-white mt-1" data-i18n="coord-audit-desc">Initial 30-Min Systems Audit</p>
+            </div>
+            <span class="px-3 py-1 rounded-full bg-saturn-green/15 text-saturn-green font-mono text-[10px] sm:text-[11px] border border-dashed border-saturn-green/40" data-i18n="coord-audit-badge">NO CHARGE</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Column: High-End Glassmorphic Interactive Console -->
+      <div class="lg:col-span-7">
+        <div class="p-6 sm:p-10 lg:p-12 rounded-3xl glass-card shadow-2xl relative">
+          <form class="space-y-5 sm:space-y-6" id="project-form" onsubmit="submitForm(event)">
+            <!-- Name & Business -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-5 sm:gap-6">
+              <div>
+                <label class="block font-mono text-xs uppercase tracking-wider text-saturn-muted mb-2" data-i18n="lbl-name">Your Full Name *</label>
+                <input class="w-full px-4 py-3.5 rounded-xl bg-black/60 border border-white/10 text-white placeholder:text-saturn-dim focus:outline-none focus:border-saturn-green focus:ring-1 focus:ring-saturn-green font-sans text-sm transition-all" data-i18n-ph="ph-name" placeholder="e.g. Rahul Mehta" required="" type="text">
+              </div>
+              <div>
+                <label class="block font-mono text-xs uppercase tracking-wider text-saturn-muted mb-2" data-i18n="lbl-comp">Business / Company *</label>
+                <input class="w-full px-4 py-3.5 rounded-xl bg-black/60 border border-white/10 text-white placeholder:text-saturn-dim focus:outline-none focus:border-saturn-green focus:ring-1 focus:ring-saturn-green font-sans text-sm transition-all" data-i18n-ph="ph-comp" placeholder="e.g. Apex Enterprises" required="" type="text">
+              </div>
+            </div>
+
+            <!-- Email or Phone -->
+            <div>
+              <label class="block font-mono text-xs uppercase tracking-wider text-saturn-muted mb-2" data-i18n="lbl-contact">Email or Phone *</label>
+              <input class="w-full px-4 py-3.5 rounded-xl bg-black/60 border border-white/10 text-white placeholder:text-saturn-dim focus:outline-none focus:border-saturn-green focus:ring-1 focus:ring-saturn-green font-sans text-sm transition-all" data-i18n-ph="ph-contact" placeholder="email@company.com or +91 98000 00000" required="" type="text">
+            </div>
+
+            <!-- What does your business do? -->
+            <div>
+              <label class="block font-mono text-xs uppercase tracking-wider text-saturn-muted mb-2" data-i18n="lbl-bizdesc">What Does Your Business Do? *</label>
+              <input class="w-full px-4 py-3.5 rounded-xl bg-black/60 border border-white/10 text-white placeholder:text-saturn-dim focus:outline-none focus:border-saturn-green focus:ring-1 focus:ring-saturn-green font-sans text-sm transition-all" data-i18n-ph="ph-bizdesc" placeholder="e.g. Private school with 800+ students, or Multi-city real estate brokerage..." required="" type="text">
+            </div>
+
+            <!-- What problem are you trying to solve? -->
+            <div>
+              <label class="block font-mono text-xs uppercase tracking-wider text-saturn-muted mb-2" data-i18n="lbl-problem">What Problem Are You Trying To Solve? *</label>
+              <textarea class="w-full px-4 py-3.5 rounded-xl bg-black/60 border border-white/10 text-white placeholder:text-saturn-dim focus:outline-none focus:border-saturn-green focus:ring-1 focus:ring-saturn-green font-sans text-sm transition-all resize-none" data-i18n-ph="ph-problem" placeholder="Describe where customers are dropping off, what is draining your team's time, or what you want automated..." required="" rows="4"></textarea>
+            </div>
+
+            <!-- Tactile High-Contrast Submit CTA Button -->
+            <button class="btn-embroidered-primary w-full py-4 px-8 rounded-full text-xs uppercase tracking-wider flex items-center justify-center gap-3 cursor-pointer" id="form-submit-btn" type="submit">
+              <span data-i18n="btn-send">Book a Growth Consultation →</span>
+            </button>
+
+            <!-- Instant Interactive Validation & Success Confirmation -->
+            <div class="hidden p-6 rounded-2xl bg-black/90 border border-dashed border-saturn-green text-center" id="form-success">
+              <span class="text-saturn-green font-mono text-xs uppercase tracking-widest block mb-1" data-i18n="form-success-title">AUDIT BRIEF DISPATCHED</span>
+              <p class="text-xs sm:text-sm text-white" data-i18n="form-success-msg">Our Lead Growth Architect will review your bottleneck and contact you within 2 business hours.</p>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- PRESTIGIOUS & ARCHITECTURAL FOOTER -->
+<footer class="w-full bg-black border-t border-dashed border-white/15 py-12 sm:py-16 px-4 sm:px-8 lg:px-12 xl:px-14 relative">
+  <div class="max-w-[1600px] mx-auto">
+    <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-8 sm:gap-10 pb-10 sm:pb-12 border-b border-dashed border-white/10">
+      <div>
+        <a class="inline-block mb-3" href="#">
+          <img alt="Saturn Growth Systems Logo" class="h-9 sm:h-11 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1WUe0dj_8mmKQ_lgLday6r0Twpu_1qvqzTe5o4DOtgiOfUf-Vof_H6cNkte3lRg0uHOrLgyTXCVj4x1oBHBG9Ms4xI66OAR61waSsjmXvQBvg5m6K_vstoKas7xvGfCrNB7gVswKJyNrB18Rl2zEp08nPRL-QDuSGWn2mMRrx8nK6DHeJu_BWujsKe17C8Cib2nxKoc5sikU_sdwMLoTsbzXXblWnqa1oWZD-WvTKLpNKpang-stIkK6z0">
+        </a>
+        <p class="font-mono text-xs text-saturn-muted max-w-md mt-1" data-i18n="footer-motto">
+          Understand the problem. Build the solution. Create the growth.
+        </p>
+      </div>
+
+      <!-- Section Quick Navigation Links -->
+      <div class="flex flex-wrap items-center gap-4 sm:gap-8 font-mono text-xs tracking-widest uppercase text-saturn-muted">
+        <a class="hover:text-saturn-green transition-colors" href="#problem" data-i18n="nav-problem">Problem</a>
+        <a class="hover:text-saturn-green transition-colors" href="#disciplines" data-i18n="nav-disciplines">Disciplines</a>
+        <a class="hover:text-saturn-green transition-colors" href="#systems" data-i18n="nav-systems">Systems</a>
+        <a class="hover:text-saturn-green transition-colors" href="#verticals" data-i18n="nav-verticals">Verticals</a>
+        <a class="hover:text-saturn-green transition-colors" href="#approach" data-i18n="nav-approach">Approach</a>
+        <a class="hover:text-saturn-green transition-colors" href="#outcomes" data-i18n="nav-outcomes">Outcomes</a>
+        <a class="hover:text-saturn-green transition-colors" href="#contact" data-i18n="nav-contact">Contact</a>
+      </div>
+
+      <!-- Direct Contact Coordinates -->
+      <div class="flex items-center gap-3 bg-white/[0.04] px-4 py-2.5 rounded-full border border-dashed border-white/15 font-mono text-xs">
+        <span class="text-saturn-muted" data-i18n="coord-label">COORDINATES:</span>
+        <a class="text-white hover:text-saturn-green font-bold transition-colors" href="mailto:info@saturngrowth.com">info@saturngrowth.com</a>
+        <button class="px-2 py-0.5 rounded text-[10px] bg-white/10 hover:bg-saturn-green hover:text-black transition-all" onclick="navigator.clipboard.writeText('info@saturngrowth.com'); this.innerText='COPIED!'">COPY</button>
+      </div>
+    </div>
+
+    <div class="flex flex-col sm:flex-row items-center justify-between gap-4 pt-8 font-mono text-xs text-saturn-dim text-center sm:text-left">
+      <div>© 2026 SATURN GROWTH SYSTEMS. ALL RIGHTS RESERVED.</div>
+      <div class="flex items-center gap-6">
+        <span data-i18n="footer-scale">ENGINEERED FOR COMPOUNDING SCALE</span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- JAVASCRIPT LOGIC (DUAL LANGUAGE, GLOW CURSOR, AURORA BACKGROUND, PARTICLE TEXT, ACCORDION, MOBILE MENU) -->
+<script>
+  // 1. Dual Language Dictionary (English & Authentic Hinglish)
+  const contentData = {
+    en: {
+      "header-tag": "INDEPENDENT GROWTH STUDIO",
+      "nav-problem": "Problem",
+      "nav-disciplines": "Disciplines",
+      "nav-systems": "Systems",
+      "nav-verticals": "Verticals",
+      "nav-approach": "Approach",
+      "nav-outcomes": "Outcomes",
+      "nav-contact": "Contact",
+      "nav-cta": "Book Consultation",
+      "hero-tag": "SATURN GROWTH SYSTEMS ◆ INDEPENDENT STUDIO",
+      "hero-headline-1": "WE SOLVE BUSINESS PROBLEMS.",
+      "hero-headline-2": "you grow.",
+      "hero-sub": "Your business does not need more technology just for the sake of technology. It needs more customers, more enquiries, better operations, and more revenue. That is where Saturn Growth Systems comes in.",
+      "cta-primary": "Book a Growth Consultation",
+      "cta-secondary": "Tell Us Your Problem",
+      "hero-telemetry-badge": "SATURN TELEMETRY CONSOLE // ORBITAL NODE ACTIVE",
+      "hero-telemetry-discipline": "DISCIPLINE: GROWTH SYSTEMS ARCHITECTURE",
+      "sec2-tag": "[ OUR APPROACH // WHAT GUIDES THE WORK ]",
+      "sec2-pill": "Our Approach / What guides the work",
+      "sec1-title": "Your Problem Comes First. <br/><span class='font-serif-accent text-saturn-green text-3xl sm:text-5xl lg:text-6xl xl:text-7xl block mt-1 tracking-normal shiny-text-green'>Our Solution Comes Second.</span>",
+      "sec1-editorial-body": "<p>Most agencies sell what they already know how to build. We work differently. We first understand: What is costing you customers? Where are leads getting lost? What is taking your team too much time? What could be automated? What is preventing your business from growing faster?</p><p>Then we design and implement the solution that addresses the real problem. No unnecessary features. No complicated technical language. No one-size-fits-all packages. Just solutions built around your business.</p>",
+      "diag-proto-tag": "01 ◆ SATURN DIAGNOSTIC PROTOCOL",
+      "diag-proto-title": "Proprietary Root-Cause Systems Audit",
+      "q1-num": "01 // LEAKAGE",
+      "q1-t": "Costing Customers?",
+      "q1-d": "Unclear messaging, delayed responses, friction in checkouts, or lack of social proof that repels buyers.",
+      "q2-num": "02 // DROPOFF",
+      "q2-t": "Lost Leads?",
+      "q2-d": "Messages left unread, slow follow-ups, lost inquiries between reps, or no automated retargeting loop.",
+      "q3-num": "03 // DRAG",
+      "q3-t": "Team Time Waste?",
+      "q3-d": "Manual data entry, repetitive phone calls, compiling reports manually, and endless admin coordination.",
+      "q4-num": "04 // AUTOMATION",
+      "q4-t": "Automatable Friction?",
+      "q4-d": "Instant customer responses, appointment booking, invoices, client onboarding, and automated reminders.",
+      "q5-num": "05 // CEILING",
+      "q5-t": "Growth Bottlenecks?",
+      "q5-d": "Inconsistent leads, poor conversion rates, operational chaos when volume increases, or lacking modern software.",
+      "sys-tag": "[ SELECTED SYSTEMS // 03 ]",
+      "sys-title": "WORK THAT <span class='font-serif-accent text-saturn-green lowercase text-3xl sm:text-5xl lg:text-6xl xl:text-7xl shiny-text-green'>speaks for itself</span>",
+      "sys-arch": "OPERATIONAL ARCHIVES // <span class='text-saturn-green font-bold'>01 / 04</span>",
+      "card1-tag": "01 ◆ ENTERPRISE TELEMETRY",
+      "card1-t": "ENTERPRISE REVENUE TELEMETRY & COMMAND CENTER",
+      "card1-d": "Real-time pipeline monitoring, automated multi-display sync, conversion anomaly detection, and unified executive metrics.",
+      "card2-tag": "02 ◆ SATURN CORE NODE",
+      "card2-t": "PROPRIETARY BUSINESS BACKBONE",
+      "card2-d": "High-throughput data orchestration server, custom automated pipelines, sub-second trigger engine, and secure offline failover.",
+      "card3-tag": "03 ◆ OMNICHANNEL CONSOLE",
+      "card3-t": "AUTONOMOUS LEAD ROUTING & GLASS CONSOLE",
+      "card3-d": "Dynamic intake app, instant automated qualification, synced CRM dispatch, and real-time deal alerts directly to phones.",
+      "card4-tag": "04 ◆ EXECUTIVE DECISION ENGINE",
+      "card4-t": "EXECUTIVE GROWTH ARCHITECTURE & DECISION ENGINE",
+      "card4-d": "Multi-department operations alignment, data-backed roadmap execution, and synchronized automated reporting for leadership.",
+      "disc-tag": "[ COMPREHENSIVE CAPABILITIES // 04 ]",
+      "disc-count": "9 DISCIPLINES",
+      "disc-title": "DISCIPLINES <span class='font-serif-accent text-saturn-green lowercase text-3xl sm:text-5xl lg:text-6xl xl:text-7xl shiny-text-green'>that move together</span>",
+      "srv-1-t": "Websites & Digital Presence",
+      "srv-1-pill": "Fast ◆ High-Converting ◆ Mobile-First",
+      "srv-1-d": "Websites built for speed, immediate customer trust, and seamless enquiry generation. Includes custom portfolio portals, sales landing pages, and institutional web presences engineered to convert visitors into phone calls and booked appointments.",
+      "srv-2-t": "Marketing & Lead Generation",
+      "srv-2-pill": "Meta Ads ◆ Google Funnels ◆ Inbound Flow",
+      "srv-2-d": "Paid ad funnels, search visibility, high-intent lead magnets, and automated customer qualification that brings serious buyers to your door rather than casual clickers.",
+      "srv-3-t": "Social Media Management",
+      "srv-3-pill": "Content ◆ Short-Form Video ◆ Category Authority",
+      "srv-3-d": "Consistent, high-quality content production and brand positioning that builds unquestioned authority, establishes client trust, and keeps your company top-of-mind.",
+      "srv-4-t": "AI & Chat Assistants",
+      "srv-4-pill": "24/7 WhatsApp API ◆ Instant Response ◆ Zero Lag",
+      "srv-4-d": "Smart WhatsApp and website bots that answer enquiries in under 5 seconds, capture customer contact info, qualify requests, and pass warm leads directly to your sales team.",
+      "srv-5-t": "Voice & Calling Systems",
+      "srv-5-pill": "Zero Missed Calls ◆ Smart IVR ◆ Auto Reminders",
+      "srv-5-d": "Automated phone systems and voice bots that ensure zero missed calls, handle routine customer questions, schedule meetings on your calendar, and send automatic follow-up reminders.",
+      "srv-6-t": "Custom Apps & Software",
+      "srv-6-pill": "Bespoke CRMs ◆ Client Portals ◆ Internal Tools",
+      "srv-6-d": "Software built around how you actually work — custom customer portals, quotation engines, internal tracking dashboards, and management apps that off-the-shelf software can't provide.",
+      "srv-7-t": "Business Automation",
+      "srv-7-pill": "Make / Webhooks ◆ Seamless Sync ◆ 0 Manual Work",
+      "srv-7-d": "Connect your tools together. Invoices that send themselves, contracts auto-generated upon payment, and notification systems that update your team instantly with zero manual intervention.",
+      "srv-8-t": "AI-Powered Business Systems",
+      "srv-8-pill": "Intelligent Workflows ◆ Document AI ◆ Telemetry",
+      "srv-8-d": "Integrating modern AI models into daily operations: document scanning, customer categorization, intelligent routing, and predictive business recommendations designed for operational efficiency.",
+      "srv-9-t": "Growth Consultancy",
+      "srv-9-pill": "Fractional CTO ◆ Tech Strategy ◆ Roadmap",
+      "srv-9-d": "Strategic technology advice from someone who understands commercial business reality. We audit existing systems, identify high-leverage growth levers, and chart the cleanest route forward.",
+      "banner-tag": "◆ SIGNATURE COMMITMENT",
+      "banner-statement": "\"Your problem doesn't have to fit our products. <br/><span class='font-serif-accent text-saturn-green lowercase text-2xl sm:text-4xl lg:text-5xl block mt-1 tracking-normal shiny-text-green'>Our solution has to fit your problem.\"</span>",
+      "banner-desc": "If what you need is not in the list above, that is exactly where we do our best work. We study the problem, map the solution, and build what is required.",
+      "banner-btn": "Custom Build Enquiry →",
+      "vert-tag": "[ TARGET SECTORS // 05 ]",
+      "vert-who": "WHO WE SERVE",
+      "vert-h2": "BUILT FOR BUSINESSES <br/><span class='font-serif-accent text-saturn-green lowercase text-3xl sm:text-5xl lg:text-6xl xl:text-7xl shiny-text-green'>that want to grow</span>",
+      "vert-sub": "We work with businesses of all sizes and across industries. You don't need to be a technology company — you just need an ambition to grow.",
+      "v1-num": "01 // ADMISSIONS & EDUCATION",
+      "v1-t": "Schools & Educational Institutions",
+      "v1-d": "More admissions, automated parent inquiry bots, WhatsApp pipelines, and prestigious digital positioning.",
+      "v1-tag1": "Parent Inquiry Bots",
+      "v1-tag2": "Admissions CRM",
+      "v2-num": "02 // PROPERTY & ASSETS",
+      "v2-t": "Real Estate Businesses",
+      "v2-d": "Qualified buyer lead capture, automated site-visit calendar sync, property inquiry dispatchers, and CRM tracking.",
+      "v2-tag1": "Tour Booking",
+      "v2-tag2": "High-Value Ads",
+      "v3-num": "03 // MULTI-LOCATION",
+      "v3-t": "Franchise Owners",
+      "v3-d": "Standardized lead capture, localized marketing playbooks, and unified multi-location dashboard management.",
+      "v3-tag1": "Centralized KPI Hub",
+      "v3-tag2": "Brand Uniformity",
+      "v4-num": "04 // FAST SCALING",
+      "v4-t": "Founders & Growing Companies",
+      "v4-d": "Complete digital ecosystems built fast from zero to scale without bloated engineering agency payroll.",
+      "v4-tag1": "Zero-to-Scale",
+      "v4-tag2": "Fractional Tech Team",
+      "v5-num": "05 // REINVENTION & MODERNIZATION",
+      "v5-t": "Local & Established Businesses",
+      "v5-d": "Modernize legacy client touchpoints, dominate local search, replace chaotic WhatsApp groups with integrated CRM automations, and eliminate administrative drag.",
+      "v5-tag1": "Legacy Upgrade",
+      "v5-tag2": "Local Search SEO",
+      "v5-tag3": "Ops Modernization",
+      "vert-note": "And when your industry is different, that is not a problem. <span class='text-saturn-green font-bold'>We learn the business first.</span>",
+      "app-tag": "[ HOW WE WORK // 06 ]",
+      "app-sub": "5-STEP PROTOCOL",
+      "app-h2": "OUR <span class='font-serif-accent text-saturn-green lowercase text-3xl sm:text-5xl lg:text-6xl shiny-text-green'>approach</span>",
+      "st-1-t": "Understand",
+      "st-1-d": "We listen. We ask deep questions about your day-to-day operations, cash friction, and existing bottlenecks.",
+      "st-1-ph": "PHASE // AUDIT",
+      "st-2-t": "Diagnose",
+      "st-2-d": "We pinpoint the exact issue. Is it visibility, qualification speed, trust deficit, or conversion follow-up?",
+      "st-2-ph": "PHASE // ROOT CAUSE",
+      "st-3-t": "Design",
+      "st-3-d": "We propose the leanest, most effective solution. Nothing bloated, nothing unneeded—pure structural clarity.",
+      "st-3-ph": "PHASE // BLUEPRINT",
+      "st-4-t": "Build",
+      "st-4-d": "We build, configure, test, and deploy fast. Clean code, rock-solid integrations, high aesthetic authority.",
+      "st-4-ph": "PHASE // PRODUCTION",
+      "st-5-t": "Grow",
+      "st-5-d": "We monitor outputs, refine conversion metrics, train your team, and support your continuous upward trajectory.",
+      "st-5-ph": "PHASE // EXPANSION",
+      "ws-tag": "[ COMPETITIVE LEVERAGE // 07 ]",
+      "ws-h2": "WHY <span class='font-serif-accent text-saturn-green lowercase text-3xl sm:text-5xl lg:text-6xl xl:text-7xl shiny-text-green'>saturn?</span>",
+      "ws-sub": "We replace the friction of traditional bloated agencies with disciplined, outcome-first engineering.",
+      "ws-1-t": "Faster",
+      "ws-1-d": "Rapid deployment cycles. We launch working systems in days and weeks rather than spending quarters inside endless slide decks.",
+      "ws-2-t": "Practical",
+      "ws-2-d": "No unnecessary technical jargon or vanity software tools. We only implement architectures that directly move commercial needles.",
+      "ws-3-t": "Cost-Effective",
+      "ws-3-d": "Fraction of the cost of building an in-house engineering squad or retaining multiple disjointed marketing and tech agencies.",
+      "ws-4-t": "High Quality",
+      "ws-4-d": "Elite digital craft with precision engineering, clean codebase integrity, sub-second response times, and supreme aesthetic authority.",
+      "ws-5-t": "End-to-End Support",
+      "ws-5-d": "We don't vanish after project launch. We train your staff, monitor daily operations, and actively support your ongoing expansion.",
+      "ws-6-t": "One Partner. Multiple Solutions.",
+      "ws-6-d": "From web presence and ad campaigns to automated telephony and custom internal portals—all unified under one technical partner.",
+      "outcomes-tag": "[ THE PROMISE // 08 ]",
+      "outcomes-headline": "WE DON'T JUST BUILD THINGS. <br/><span class='font-serif-accent text-saturn-green lowercase text-3xl sm:text-5xl lg:text-6xl xl:text-7xl block mt-1 shiny-text-green'>we build business outcomes.</span>",
+      "out-1": "MORE ENQUIRIES",
+      "out-1-sub": "Frictionless discovery funnel",
+      "out-2": "MORE CUSTOMERS",
+      "out-2-sub": "Immediate trust conversion",
+      "out-3": "MORE SALES",
+      "out-3-sub": "Automated pipeline velocity",
+      "out-4": "LESS WASTED TIME",
+      "out-4-sub": "Autonomous operations",
+      "out-5": "BETTER OPERATIONS",
+      "out-5-sub": "Zero human lag or leakage",
+      "out-6": "HIGHER REVENUE",
+      "out-6-sub": "Predictable compounding scale",
+      "contact-tag": "[ INQUIRY CONSOLE // 10 ]",
+      "contact-desk": "PROJECT DESK",
+      "final-h2": "LET'S FIND WHAT'S <br/><span class='font-serif-accent text-saturn-green lowercase text-3xl sm:text-5xl lg:text-6xl block mt-1 shiny-text-green'>holding your business back.</span>",
+      "final-sub": "Tell us about your business, your current challenges and where you want to go. We'll help you identify where the biggest opportunities are and what can be done about them.",
+      "motto-box": "Understand the problem.<br>Build the solution.<br>Create the growth.",
+      "coord-inquiry-title": "DIRECT INQUIRY DESK",
+      "coord-audit-title": "DISCOVERY PROTOCOL",
+      "coord-audit-desc": "Initial 30-Min Systems Audit",
+      "coord-audit-badge": "NO CHARGE",
+      "lbl-name": "Your Full Name *",
+      "lbl-comp": "Business / Company *",
+      "lbl-contact": "Email or Phone *",
+      "lbl-bizdesc": "What Does Your Business Do? *",
+      "lbl-problem": "What Problem Are You Trying To Solve? *",
+      "ph-name": "e.g. Rahul Mehta",
+      "ph-comp": "e.g. Apex Enterprises",
+      "ph-contact": "email@company.com or +91 98000 00000",
+      "ph-bizdesc": "e.g. Private school with 800+ students, or Multi-city real estate brokerage...",
+      "ph-problem": "Describe where customers are dropping off, what is draining your team's time, or what you want automated...",
+      "btn-send": "Book a Growth Consultation →",
+      "form-success-title": "AUDIT BRIEF DISPATCHED",
+      "form-success-msg": "Our Lead Growth Architect will review your bottleneck and contact you within 2 business hours.",
+      "footer-motto": "Understand the problem. Build the solution. Create the growth.",
+      "coord-label": "COORDINATES:",
+      "footer-scale": "ENGINEERED FOR COMPOUNDING SCALE"
+    },
+    hi: {
+      "header-tag": "INDEPENDENT GROWTH STUDIO",
+      "nav-problem": "Problem",
+      "nav-disciplines": "Disciplines",
+      "nav-systems": "Systems",
+      "nav-verticals": "Industries",
+      "nav-approach": "Approach",
+      "nav-outcomes": "Outcomes",
+      "nav-contact": "Contact",
+      "nav-cta": "Consultation Book Karein",
+      "hero-tag": "SATURN GROWTH SYSTEMS ◆ INDEPENDENT GROWTH STUDIO",
+      "hero-headline-1": "HUM BUSINESS PROBLEMS SOLVE KARTE HAIN.",
+      "hero-headline-2": "aap grow karte hain.",
+      "hero-sub": "Aapke business ko bina zarurat ke faltu tools nahi chahiye. Isko chahiye zyada customers, verified inquiries, smooth operations aur predictable revenue growth. Yahi deliver karta hai Saturn Growth Systems.",
+      "cta-primary": "Growth Consultation Book Karein",
+      "cta-secondary": "Humein Apni Problem Batayein",
+      "hero-telemetry-badge": "SATURN TELEMETRY CONSOLE // ORBITAL NODE ACTIVE",
+      "hero-telemetry-discipline": "DISCIPLINE: GROWTH SYSTEMS ARCHITECTURE",
+      "sec2-tag": "[ HAMARA APPROACH // KAAM KAISE HOTA HAI ]",
+      "sec2-pill": "Hamara Approach / What guides the work",
+      "sec1-title": "Aapki Problem Pehle Aati Hai. <br/><span class='font-serif-accent text-saturn-green text-3xl sm:text-5xl lg:text-6xl xl:text-7xl block mt-1 tracking-normal shiny-text-green'>Hamara Solution Baad Mein.</span>",
+      "sec1-editorial-body": "<p>Zyadatar agencies wo bechti hain jo unke paas pehle se tayar hai. Hum pehle samajhte hain: Customers kahan kho rahe hain? Leads kahan phas rahi hain? Team ka time kahan waste hota hai? Kaunsa kaam automate ho sakta hai? Aur business ko tezi se grow karne se kya rok raha hai?</p><p>Phir hum seedhe wahi solution banate hain jo aapki real problem ko theek kare. Koi faltu technical jargon nahi, koi unnecessary tools nahi. Sirf aapke business ke mutabik engineered systems.</p>",
+      "diag-proto-tag": "01 ◆ SATURN DIAGNOSTIC PROTOCOL",
+      "diag-proto-title": "Proprietary Root-Cause Systems Audit",
+      "q1-num": "01 // CUSTOMER DROP-OFF",
+      "q1-t": "Customers Kho Rahe Hain?",
+      "q1-d": "Slow response speed, confusing website ya trust ki kami jo potential buyers ko wapas bhej deti hai.",
+      "q2-num": "02 // LEAD DROP",
+      "q2-t": "Leads Miss Ho Rahi Hain?",
+      "q2-d": "Unanswered WhatsApp messages, late sales calls aur automated follow-up loop na hona.",
+      "q3-num": "03 // TIME DRAIN",
+      "q3-t": "Team Ka Time Waste Ho Raha Hai?",
+      "q3-d": "Manual Excel entry, bar-bar routine phone calls, aur unnecessary administrative paper trail.",
+      "q4-num": "04 // AUTOMATION",
+      "q4-t": "Repetitive Kaam Automate Karein",
+      "q4-d": "Instant 24/7 customer chat reply, calendar booking, automated invoices aur payment reminders.",
+      "q5-num": "05 // SCALE CEILING",
+      "q5-t": "Business Growth Ruki Hui Hai?",
+      "q5-d": "Inconsistent leads, poor conversion rates, ya purana outdated software jo badhte volume ko handle nahi kar pata.",
+      "sys-tag": "[ SELECTED SYSTEMS // 03 ]",
+      "sys-title": "KAAM JO <span class='font-serif-accent text-saturn-green lowercase text-3xl sm:text-5xl lg:text-6xl xl:text-7xl shiny-text-green'>khud bolta hai</span>",
+      "sys-arch": "OPERATIONAL ARCHIVES // <span class='text-saturn-green font-bold'>01 / 04</span>",
+      "card1-tag": "01 ◆ ENTERPRISE TELEMETRY",
+      "card1-t": "ENTERPRISE REVENUE TELEMETRY & COMMAND CENTER",
+      "card1-d": "Real-time pipeline monitoring, automated multi-display sync, conversion anomaly detection aur unified executive metrics.",
+      "card2-tag": "02 ◆ SATURN CORE NODE",
+      "card2-t": "PROPRIETARY BUSINESS BACKBONE",
+      "card2-d": "High-throughput data orchestration server, custom automated pipelines, sub-second trigger engine aur secure failover.",
+      "card3-tag": "03 ◆ OMNICHANNEL CONSOLE",
+      "card3-t": "AUTONOMOUS LEAD ROUTING & GLASS CONSOLE",
+      "card3-d": "Dynamic intake app, instant automated qualification, synced CRM dispatch aur real-time deal alerts seedhe phone par.",
+      "card4-tag": "04 ◆ EXECUTIVE DECISION ENGINE",
+      "card4-t": "EXECUTIVE GROWTH ARCHITECTURE & DECISION ENGINE",
+      "card4-d": "Multi-department operations alignment, data-backed roadmap execution aur synchronized automated leadership reports.",
+      "disc-tag": "[ COMPREHENSIVE CAPABILITIES // 04 ]",
+      "disc-count": "9 DISCIPLINES",
+      "disc-title": "DISCIPLINES <span class='font-serif-accent text-saturn-green lowercase text-3xl sm:text-5xl lg:text-6xl xl:text-7xl shiny-text-green'>jo ek sath kaam karti hain</span>",
+      "srv-1-t": "High-Converting Websites & Digital Presence",
+      "srv-1-pill": "Fast ◆ High-Converting ◆ Mobile-First",
+      "srv-1-d": "Super-fast websites jo pehli nazar me customer trust banati hain aur confirmed inquiry calls generate karti hain. Sales landing pages aur portfolio portals.",
+      "srv-2-t": "Targeted Marketing & Lead Generation",
+      "srv-2-pill": "Meta Ads ◆ Google Funnels ◆ Inbound Flow",
+      "srv-2-d": "Targeted Meta aur Google ad funnels jo cold traffic ko serious buyers aur booked consultation appointments me convert karte hain.",
+      "srv-3-t": "Social Media & Brand Authority",
+      "srv-3-pill": "Content ◆ Short-Form Video ◆ Category Authority",
+      "srv-3-d": "High-production short video content aur strategic storytelling jo aapke business ko industry me category leader banati hai.",
+      "srv-4-t": "AI & 24/7 WhatsApp Chatbots",
+      "srv-4-pill": "24/7 WhatsApp API ◆ Instant Response ◆ Zero Lag",
+      "srv-4-d": "Smart 24/7 WhatsApp bots jo 5 seconds me reply dekar leads qualify karte hain aur warm leads seedhe sales team ko push karte hain.",
+      "srv-5-t": "Automated Voice & Calling Systems",
+      "srv-5-pill": "Zero Missed Calls ◆ Smart IVR ◆ Auto Reminders",
+      "srv-5-d": "Smart AI telephony jo busy time pe zero calls miss hone deti hai aur routine queries solve karke meeting calendar schedule karti hai.",
+      "srv-6-t": "Custom Apps & Tailor-Made Software",
+      "srv-6-pill": "Bespoke CRMs ◆ Client Portals ◆ Internal Tools",
+      "srv-6-d": "Aapke workflow ke mutabik custom client portals, quotation engines, internal tracking dashboards aur tailor-made software.",
+      "srv-7-t": "End-to-End Business Automation",
+      "srv-7-pill": "Make / Webhooks ◆ Seamless Sync ◆ 0 Manual Work",
+      "srv-7-d": "Aapke sabhi tools sync — automated contract creation, payment hot-triggers aur team notification bina kisi manual error ke.",
+      "srv-8-t": "AI-Powered Business Systems",
+      "srv-8-pill": "Intelligent Workflows ◆ Document AI ◆ Telemetry",
+      "srv-8-d": "Modern AI models ka integration: document parsing, customer classification, automated lead dispatch aur predictive growth recommendations.",
+      "srv-9-t": "Strategic Growth Consultancy",
+      "srv-9-pill": "Fractional CTO ◆ Tech Strategy ◆ Roadmap",
+      "srv-9-d": "Fractional CTO aur practical commercial technology strategy jo business friction ko identify karke direct growth path banati hai.",
+      "banner-tag": "◆ SIGNATURE COMMITMENT",
+      "banner-statement": "\"Aapki problem ko hamare products me fit nahi hona. <br/><span class='font-serif-accent text-saturn-green lowercase text-2xl sm:text-4xl lg:text-5xl block mt-1 tracking-normal shiny-text-green'>Hamare solution ko aapki problem solve karni hai.\"</span>",
+      "banner-desc": "Agar aapki requirement upar di gayi list me nahi hai, toh wahi hamara core expertise hai. Humein batayein kya problem hai, solution hum banayenge.",
+      "banner-btn": "Bespoke Project Discuss Karein →",
+      "vert-tag": "[ TARGET SECTORS // 05 ]",
+      "vert-who": "WHO WE SERVE",
+      "vert-h2": "UN SABHI BUSINESSES KE LIYE <br/><span class='font-serif-accent text-saturn-green lowercase text-3xl sm:text-5xl lg:text-6xl xl:text-7xl shiny-text-green'>jo scale karna chahte hain</span>",
+      "vert-sub": "Hum har industry aur har size ke business ke saath judte hain. Aapko tech company hone ki zarurat nahi hai — bas grow karne ka ambition hona chahiye.",
+      "v1-num": "01 // ADMISSIONS & EDUCATION",
+      "v1-t": "Schools aur Coaching Institutes",
+      "v1-d": "Zyada verified admissions, automated parent inquiry bots aur modern prestige digital presence.",
+      "v1-tag1": "Parent Inquiry Bots",
+      "v1-tag2": "Admissions CRM",
+      "v2-num": "02 // PROPERTY & ASSETS",
+      "v2-t": "Real Estate Builders aur Property Firms",
+      "v2-d": "Verified buyer leads, automated site-visit calendar sync aur direct high-ticket CRM lead dispatch.",
+      "v2-tag1": "Site-Visit Booking",
+      "v2-tag2": "High-Intent Meta Ads",
+      "v3-num": "03 // MULTI-LOCATION",
+      "v3-t": "Franchise aur Multi-Outlet Brands",
+      "v3-d": "Standardized lead capture, localized marketing playbooks aur unified multi-location dashboards.",
+      "v3-tag1": "Centralized KPI Hub",
+      "v3-tag2": "Brand Consistency",
+      "v4-num": "04 // FAST SCALING",
+      "v4-t": "Founders aur High-Growth Startups",
+      "v4-d": "Bina kisi bloated tech team payroll ke complete digital ecosystem zero-to-scale tezi se build karein.",
+      "v4-tag1": "Zero-to-Scale",
+      "v4-tag2": "Fractional Tech Team",
+      "v5-num": "05 // REINVENTION & MODERNIZATION",
+      "v5-t": "Local Vyapaar aur Established Businesses",
+      "v5-d": "Manual paperwork aur WhatsApp chaos khatam karein, modern CRM lagayein aur local search me dominate karein.",
+      "v5-tag1": "Legacy Upgrade",
+      "v5-tag2": "Local Search SEO",
+      "v5-tag3": "Ops Modernization",
+      "vert-note": "Aur agar aapki industry bilkul alag hai, koi dikkat nahi. <span class='text-saturn-green font-bold'>Hum pehle aapka business model samajhte hain.</span>",
+      "app-tag": "[ HOW WE WORK // 06 ]",
+      "app-sub": "5-STEP PROTOCOL",
+      "app-h2": "HAMARA <span class='font-serif-accent text-saturn-green lowercase text-3xl sm:text-5xl lg:text-6xl shiny-text-green'>5-step protocol</span>",
+      "st-1-t": "Samajhna (Deep Audit)",
+      "st-1-d": "Hum dhyan se sunte hain aur aapke daily operations ki actual reality aur operational friction note karte hain.",
+      "st-1-ph": "PHASE // AUDIT",
+      "st-2-t": "Diagnose Karna (Root Cause)",
+      "st-2-d": "Asli dikkat kahan hai: visibility me, response speed me, ya conversion follow-up me?",
+      "st-2-ph": "PHASE // ROOT CAUSE",
+      "st-3-t": "Design Karna (Lean Blueprint)",
+      "st-3-d": "Sabse direct aur high-leverage solution design karte hain. No extra fluff, no useless tools.",
+      "st-3-ph": "PHASE // BLUEPRINT",
+      "st-4-t": "Build & Deploy (Fast Production)",
+      "st-4-d": "Tezi se build, test aur deploy karte hain. Clean code aur reliable rock-solid engineering.",
+      "st-4-ph": "PHASE // PRODUCTION",
+      "st-5-t": "Scale & Grow (Continuous Trajectory)",
+      "st-5-d": "Results track karte hain, conversion metrics refine karte hain aur aapki team ko continuous support dete hain.",
+      "st-5-ph": "PHASE // EXPANSION",
+      "ws-tag": "[ COMPETITIVE LEVERAGE // 07 ]",
+      "ws-h2": "KYUN <span class='font-serif-accent text-saturn-green lowercase text-3xl sm:text-5xl lg:text-6xl xl:text-7xl shiny-text-green'>saturn?</span>",
+      "ws-sub": "Hum traditional bloated agencies ke lambe chakkaron ko outcome-driven disciplined engineering se replace karte hain.",
+      "ws-1-t": "Tez Delivery (Days, Not Quarters)",
+      "ws-1-d": "Hafton aur mahino ke lambe slide decks ke bajaye kuch hi dino me fully working systems live ho jate hain.",
+      "ws-2-t": "Seedha Practical Kaam (No Jargon)",
+      "ws-2-d": "Bina kisi faaltu technical jargon ke wahi tools implement karte hain jo aapka commercial revenue badhate hain.",
+      "ws-3-t": "Kifayati aur High-ROI",
+      "ws-3-d": "Multiple fragmented agencies ya expensive in-house tech team rakhne se bohot zyada cost-effective.",
+      "ws-4-t": "Top Engineering Quality",
+      "ws-4-d": "Precision engineering, sub-second response time, ultra-clean code aur supreme visual authority.",
+      "ws-5-t": "End-to-End Team Support",
+      "ws-5-d": "Launch ke baad gayab nahi hote. Aapki team ko train karte hain aur daily operations support karte hain.",
+      "ws-6-t": "Ek Hi Partner, Saare Solutions",
+      "ws-6-d": "Websites, Meta ads, WhatsApp bots se lekar custom software tak — sab ek hi reliable partner ke sath.",
+      "outcomes-tag": "[ THE PROMISE // 08 ]",
+      "outcomes-headline": "HUM SIRF TOOLS NAHI BANATE. <br/><span class='font-serif-accent text-saturn-green lowercase text-3xl sm:text-5xl lg:text-6xl xl:text-7xl block mt-1 shiny-text-green'>hum business outcomes banate hain.</span>",
+      "out-1": "ZYADA INQUIRIES",
+      "out-1-sub": "Bina kisi rukawat ke continuous discovery",
+      "out-2": "ZYADA CUSTOMERS",
+      "out-2-sub": "Instant trust aur verified bookings",
+      "out-3": "ZYADA SALES",
+      "out-3-sub": "Automated pipeline velocity",
+      "out-4": "KAM SAMAY BARBAAD",
+      "out-4-sub": "Autonomous smooth operations",
+      "out-5": "BEHTAR OPERATIONS",
+      "out-5-sub": "Zero human lag ya lead drop",
+      "out-6": "HIGHER REVENUE",
+      "out-6-sub": "Predictable compounding scale",
+      "contact-tag": "[ INQUIRY CONSOLE // 10 ]",
+      "contact-desk": "PROJECT DESK",
+      "final-h2": "DEKHTE HAIN KYA <br/><span class='font-serif-accent text-saturn-green lowercase text-3xl sm:text-5xl lg:text-6xl block mt-1 shiny-text-green'>aapke business ko rok raha hai.</span>",
+      "final-sub": "Humein apne business aur current challenges ke baare me bataiye. Hum identify karenge ki sabse badi growth opportunities kahan hain.",
+      "motto-box": "Understand the problem.<br>Build the solution.<br>Create the growth.",
+      "coord-inquiry-title": "DIRECT INQUIRY DESK",
+      "coord-audit-title": "DISCOVERY PROTOCOL",
+      "coord-audit-desc": "Initial 30-Min Systems Audit",
+      "coord-audit-badge": "FREE AUDIT",
+      "lbl-name": "Aapka Pura Naam *",
+      "lbl-comp": "Business / Company Ka Naam *",
+      "lbl-contact": "Email ya Phone Number *",
+      "lbl-bizdesc": "Aapka Business Kya Karta Hai? *",
+      "lbl-problem": "Aapko Kaunsi Problem Solve Karni Hai? *",
+      "ph-name": "e.g. Rahul Mehta",
+      "ph-comp": "e.g. Apex Enterprises ya Shivam Coaching",
+      "ph-contact": "email@company.com ya +91 98000 00000",
+      "ph-bizdesc": "e.g. Private school with 800+ students, ya Multi-city real estate firm...",
+      "ph-problem": "Bataiye kahan customers drop ho rahe hain, team ka time kahan ja raha hai, ya kya automate karna chahte hain...",
+      "btn-send": "Growth Consultation Book Karein →",
+      "form-success-title": "AUDIT BRIEF DISPATCH HO GAYA",
+      "form-success-msg": "Hamare Lead Growth Architect aapki request review karke agle 2 ghante me aapse contact karenge.",
+      "footer-motto": "Understand the problem. Build the solution. Create the growth.",
+      "coord-label": "COORDINATES:",
+      "footer-scale": "ENGINEERED FOR COMPOUNDING SCALE"
+    }
+  };
+
+  function setLanguage(lang) {
+    const dict = contentData[lang];
+    if (!dict) return;
+
+    // Update innerHTML / text for data-i18n
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+      const key = el.getAttribute('data-i18n');
+      if (dict[key] !== undefined) {
+        el.innerHTML = dict[key];
+      }
+    });
+
+    // Update placeholders for inputs and textareas
+    document.querySelectorAll('[data-i18n-ph]').forEach(el => {
+      const key = el.getAttribute('data-i18n-ph');
+      if (dict[key] !== undefined) {
+        el.setAttribute('placeholder', dict[key]);
+      }
+    });
+
+    const enBtn = document.getElementById('lang-en');
+    const hiBtn = document.getElementById('lang-hi');
+    if (lang === 'en') {
+      enBtn.className = "px-2.5 sm:px-3 py-1 rounded-full bg-saturn-green text-black font-bold transition-all shadow-sm text-[11px] sm:text-xs";
+      hiBtn.className = "px-2.5 sm:px-3 py-1 rounded-full text-saturn-muted hover:text-white transition-all text-[11px] sm:text-xs";
+      document.documentElement.lang = "en";
+    } else {
+      hiBtn.className = "px-2.5 sm:px-3 py-1 rounded-full bg-saturn-green text-black font-bold transition-all shadow-sm text-[11px] sm:text-xs";
+      enBtn.className = "px-2.5 sm:px-3 py-1 rounded-full text-saturn-muted hover:text-white transition-all text-[11px] sm:text-xs";
+      document.documentElement.lang = "hi";
+    }
+  }
+
+  // 2. Mobile Menu Toggle
+  function toggleMobileMenu() {
+    const drawer = document.getElementById('mobile-drawer');
+    const icon = document.getElementById('hamburger-icon');
+    const isOpen = drawer.classList.contains('open');
+
+    if (isOpen) {
+      drawer.classList.remove('open');
+      drawer.classList.add('closed');
+      icon.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>';
+    } else {
+      drawer.classList.remove('closed');
+      drawer.classList.add('open');
+      icon.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>';
+    }
+  }
+
+  // 3. Service Accordion Toggle
+  function toggleService(row) {
+    const detail = row.querySelector('.srv-detail');
+    const icon = row.querySelector('.srv-icon');
+    const isOpen = detail.style.maxHeight && detail.style.maxHeight !== '0px';
+
+    document.querySelectorAll('.srv-detail').forEach(d => d.style.maxHeight = '0px');
+    document.querySelectorAll('.srv-icon').forEach(i => {
+      i.innerText = '＋';
+    });
+
+    if (!isOpen) {
+      detail.style.maxHeight = detail.scrollHeight + 40 + 'px';
+      icon.innerText = '✕';
+    }
+  }
+
+  // 4. Scroll Reveal Observer
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry, idx) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => {
+          entry.target.classList.add('active');
+        }, idx * 60);
+      }
+    });
+  }, { threshold: 0.08 });
+
+  document.querySelectorAll('.reveal-elem').forEach(el => revealObserver.observe(el));
+
+  // 5. Form Submission Simulation
+  function submitForm(e) {
+    e.preventDefault();
+    const btn = document.getElementById('form-submit-btn');
+    const success = document.getElementById('form-success');
+    btn.disabled = true;
+    btn.innerHTML = "<span class='animate-pulse'>Analyzing Systems Blueprint...</span>";
+    setTimeout(() => {
+      btn.classList.add('hidden');
+      success.classList.remove('hidden');
+    }, 750);
+  }
+
+  // 6. React Bits: Glow Cursor Implementation
+  (function initGlowCursor() {
+    // Only initialize if device has fine pointer (desktop mouse)
+    if (window.matchMedia('(pointer: coarse)').matches) return;
+
+    const dot = document.getElementById('glow-cursor-dot');
+    const aura = document.getElementById('glow-cursor-aura');
+    if (!dot || !aura) return;
+
+    let mouseX = -100, mouseY = -100;
+    let auraX = -100, auraY = -100;
+    let dotX = -100, dotY = -100;
+    let isVisible = false;
+
+    window.addEventListener('mousemove', (e) => {
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+      if (!isVisible) {
+        isVisible = true;
+        dot.style.opacity = '1';
+        aura.style.opacity = '1';
+      }
+    });
+
+    window.addEventListener('mouseleave', () => {
+      isVisible = false;
+      dot.style.opacity = '0';
+      aura.style.opacity = '0';
+    });
+
+    // Spring Lerp Loop for smooth trailing
+    function renderCursor() {
+      // Direct tracking for dot
+      dotX += (mouseX - dotX) * 0.7;
+      dotY += (mouseY - dotY) * 0.7;
+      dot.style.transform = `translate3d(${dotX}px, ${dotY}px, 0) translate(-50%, -50%)`;
+
+      // Smooth inertia trailing for outer aura glow
+      auraX += (mouseX - auraX) * 0.18;
+      auraY += (mouseY - auraY) * 0.18;
+      aura.style.transform = `translate3d(${auraX}px, ${auraY}px, 0) translate(-50%, -50%)`;
+
+      requestAnimationFrame(renderCursor);
+    }
+    requestAnimationFrame(renderCursor);
+
+    // Interactive Hover Listeners
+    const interactiveTargets = 'a, button, input, textarea, select, .glass-card, .service-row, [role="button"]';
+    document.addEventListener('mouseover', (e) => {
+      if (e.target.closest(interactiveTargets)) {
+        aura.classList.add('hovered');
+        dot.style.transform = `translate3d(${dotX}px, ${dotY}px, 0) translate(-50%, -50%) scale(1.5)`;
+      }
+    });
+    document.addEventListener('mouseout', (e) => {
+      if (e.target.closest(interactiveTargets)) {
+        aura.classList.remove('hovered');
+        dot.style.transform = `translate3d(${dotX}px, ${dotY}px, 0) translate(-50%, -50%) scale(1)`;
+      }
+    });
+
+    document.addEventListener('mousedown', () => aura.classList.add('clicked'));
+    document.addEventListener('mouseup', () => aura.classList.remove('clicked'));
+  })();
+
+  // 7. React Bits: Aurora Background Canvas Animation
+  (function initAurora() {
+    const canvas = document.getElementById('aurora-canvas');
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    let width, height;
+    let animId;
+    let time = 0;
+
+    function resize() {
+      width = canvas.width = canvas.parentElement.offsetWidth;
+      height = canvas.height = canvas.parentElement.offsetHeight;
+    }
+    window.addEventListener('resize', resize);
+    resize();
+
+    // Multi-harmonic undulating color wave ribbons
+    function drawAurora() {
+      ctx.clearRect(0, 0, width, height);
+
+      time += 0.007;
+
+      // Color waves: Emerald green, deep pine, amber gold, and midnight cyan
+      const layers = [
+        { color1: 'rgba(0, 223, 97, 0.28)', color2: 'rgba(5, 46, 22, 0.0)', speed: 1.0, freq: 0.0018, yOffset: height * 0.35, amp: 90 },
+        { color1: 'rgba(0, 205, 88, 0.22)', color2: 'rgba(10, 10, 12, 0.0)', speed: 1.4, freq: 0.0022, yOffset: height * 0.45, amp: 110 },
+        { color1: 'rgba(229, 169, 60, 0.15)', color2: 'rgba(10, 10, 12, 0.0)', speed: 0.8, freq: 0.0015, yOffset: height * 0.25, amp: 70 },
+        { color1: 'rgba(0, 223, 97, 0.18)', color2: 'rgba(0, 83, 31, 0.0)', speed: 1.2, freq: 0.0025, yOffset: height * 0.55, amp: 100 }
+      ];
+
+      layers.forEach(layer => {
+        ctx.beginPath();
+        ctx.moveTo(0, height);
+
+        for (let x = 0; x <= width; x += 15) {
+          const wave1 = Math.sin(x * layer.freq + time * layer.speed);
+          const wave2 = Math.cos(x * layer.freq * 0.6 - time * layer.speed * 0.8);
+          const wave3 = Math.sin(x * 0.0008 + time * 0.5);
+          const y = layer.yOffset + (wave1 * 0.6 + wave2 * 0.3 + wave3 * 0.3) * layer.amp;
+          ctx.lineTo(x, y);
+        }
+
+        ctx.lineTo(width, height);
+        ctx.closePath();
+
+        const grad = ctx.createLinearGradient(0, layer.yOffset - layer.amp, 0, height);
+        grad.addColorStop(0, layer.color1);
+        grad.addColorStop(1, layer.color2);
+        ctx.fillStyle = grad;
+        ctx.fill();
+      });
+
+      animId = requestAnimationFrame(drawAurora);
+    }
+
+    // Pause when tab not visible to save GPU/battery
+    document.addEventListener('visibilitychange', () => {
+      if (document.hidden) {
+        cancelAnimationFrame(animId);
+      } else {
+        animId = requestAnimationFrame(drawAurora);
+      }
+    });
+
+    animId = requestAnimationFrame(drawAurora);
+  })();
+
+  // 8. React Bits: Particle Text Headings Animation
+  (function initParticleText() {
+    const canvas = document.getElementById('particle-text-canvas');
+    const anchor = document.getElementById('particle-text-anchor');
+    if (!canvas || !anchor) return;
+    const ctx = canvas.getContext('2d');
+    let particles = [];
+    let mouse = { x: -999, y: -999, radius: 80 };
+
+    function syncCanvas() {
+      const rect = anchor.getBoundingClientRect();
+      const parentRect = canvas.parentElement.getBoundingClientRect();
+      canvas.width = parentRect.width;
+      canvas.height = parentRect.height;
+    }
+    window.addEventListener('resize', syncCanvas);
+    syncCanvas();
+
+    // Create subtle ambient floating micro-particles over hero heading
+    const numParticles = 48;
+    for (let i = 0; i < numParticles; i++) {
+      particles.push({
+        x: Math.random() * (canvas.width || 800),
+        y: Math.random() * (canvas.height || 200),
+        originX: Math.random() * (canvas.width || 800),
+        originY: Math.random() * (canvas.height || 200),
+        vx: (Math.random() - 0.5) * 0.4,
+        vy: (Math.random() - 0.5) * 0.4,
+        size: Math.random() * 2 + 1,
+        color: Math.random() > 0.4 ? '#00df61' : '#f4f4f0',
+        alpha: Math.random() * 0.6 + 0.2
+      });
+    }
+
+    window.addEventListener('mousemove', (e) => {
+      const rect = canvas.getBoundingClientRect();
+      mouse.x = e.clientX - rect.left;
+      mouse.y = e.clientY - rect.top;
+    });
+
+    window.addEventListener('mouseleave', () => {
+      mouse.x = -999;
+      mouse.y = -999;
+    });
+
+    function loopParticles() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      particles.forEach(p => {
+        // Ambient movement
+        p.x += p.vx;
+        p.y += p.vy;
+
+        if (p.x < 0) p.x = canvas.width;
+        if (p.x > canvas.width) p.x = 0;
+        if (p.y < 0) p.y = canvas.height;
+        if (p.y > canvas.height) p.y = 0;
+
+        // Mouse repulsion physics
+        const dx = mouse.x - p.x;
+        const dy = mouse.y - p.y;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+        if (dist < mouse.radius) {
+          const angle = Math.atan2(dy, dx);
+          const force = (mouse.radius - dist) / mouse.radius;
+          p.x -= Math.cos(angle) * force * 5;
+          p.y -= Math.sin(angle) * force * 5;
+        }
+
+        ctx.save();
+        ctx.globalAlpha = p.alpha;
+        ctx.fillStyle = p.color;
+        ctx.shadowBlur = 8;
+        ctx.shadowColor = '#00df61';
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.restore();
+      });
+
+      requestAnimationFrame(loopParticles);
+    }
+    requestAnimationFrame(loopParticles);
+  })();
+</script>
+</body>
+</html>
