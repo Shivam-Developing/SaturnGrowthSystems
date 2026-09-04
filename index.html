@@ -11,13 +11,29 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Instrument+Serif:ital@0;1&family=Space+Mono:ital,wght@0,400;0,700&family=Syne:wght@700;800&display=swap" rel="stylesheet">
   </head>
   <body class="bg-saturn-bg text-saturn-cream font-sans selection:bg-saturn-green selection:text-black antialiased overflow-x-hidden">
-    <!-- Static Netlify Form Parser Scaffold -->
-    <form name="contact" netlify netlify-honeypot="bot-field" hidden>
-      <input type="text" name="name" />
-      <input type="text" name="company" />
-      <input type="text" name="contact" />
-      <input type="text" name="bizdesc" />
-      <textarea name="problem"></textarea>
+    <!-- Netlify Form Detection Scaffold -->
+    <form name="contact" netlify data-netlify="true" netlify-honeypot="bot-field" hidden>
+      <p>
+        <label>Name <input type="text" name="name" /></label>
+      </p>
+      <p>
+        <label>Email <input type="email" name="email" /></label>
+      </p>
+      <p>
+        <label>Company <input type="text" name="company" /></label>
+      </p>
+      <p>
+        <label>Phone / WhatsApp <input type="text" name="contact" /></label>
+      </p>
+      <p>
+        <label>Business Description <input type="text" name="bizdesc" /></label>
+      </p>
+      <p>
+        <label>Problem <textarea name="problem"></textarea></label>
+      </p>
+      <p>
+        <button type="submit">Send</button>
+      </p>
     </form>
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>

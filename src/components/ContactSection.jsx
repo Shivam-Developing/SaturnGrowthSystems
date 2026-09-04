@@ -10,6 +10,7 @@ export default function ContactSection() {
   const [submitting, setSubmitting] = useState(false);
   const [formData, setFormData] = useState({
     name: '',
+    email: '',
     company: '',
     contact: '',
     bizdesc: '',
@@ -207,6 +208,7 @@ export default function ContactSection() {
               <form
                 name="contact"
                 method="POST"
+                netlify="true"
                 data-netlify="true"
                 data-netlify-honeypot="bot-field"
                 onSubmit={handleSubmit}
@@ -220,10 +222,11 @@ export default function ContactSection() {
                   </label>
                 </p>
 
+                {/* Name & Email Row */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
                     <label className="block font-mono text-[11px] uppercase tracking-wider text-saturn-muted mb-1.5">
-                      {t.lblName}
+                      Name *
                     </label>
                     <input
                       type="text"
@@ -235,6 +238,24 @@ export default function ContactSection() {
                       className="w-full px-3.5 py-3 rounded-xl bg-black/60 border border-white/10 text-white placeholder:text-saturn-dim focus:outline-none focus:border-saturn-green focus:ring-1 focus:ring-saturn-green font-sans text-xs sm:text-sm transition-all"
                     />
                   </div>
+                  <div>
+                    <label className="block font-mono text-[11px] uppercase tracking-wider text-saturn-muted mb-1.5">
+                      Email *
+                    </label>
+                    <input
+                      type="email"
+                      name="email"
+                      required
+                      value={formData.email}
+                      onChange={handleChange}
+                      placeholder="e.g. rahul@apex.com"
+                      className="w-full px-3.5 py-3 rounded-xl bg-black/60 border border-white/10 text-white placeholder:text-saturn-dim focus:outline-none focus:border-saturn-green focus:ring-1 focus:ring-saturn-green font-sans text-xs sm:text-sm transition-all"
+                    />
+                  </div>
+                </div>
+
+                {/* Company & Phone Row */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
                     <label className="block font-mono text-[11px] uppercase tracking-wider text-saturn-muted mb-1.5">
                       {t.lblComp}
@@ -249,21 +270,20 @@ export default function ContactSection() {
                       className="w-full px-3.5 py-3 rounded-xl bg-black/60 border border-white/10 text-white placeholder:text-saturn-dim focus:outline-none focus:border-saturn-green focus:ring-1 focus:ring-saturn-green font-sans text-xs sm:text-sm transition-all"
                     />
                   </div>
-                </div>
-
-                <div>
-                  <label className="block font-mono text-[11px] uppercase tracking-wider text-saturn-muted mb-1.5">
-                    {t.lblContact}
-                  </label>
-                  <input
-                    type="text"
-                    name="contact"
-                    required
-                    value={formData.contact}
-                    onChange={handleChange}
-                    placeholder={t.phContact}
-                    className="w-full px-3.5 py-3 rounded-xl bg-black/60 border border-white/10 text-white placeholder:text-saturn-dim focus:outline-none focus:border-saturn-green focus:ring-1 focus:ring-saturn-green font-sans text-xs sm:text-sm transition-all"
-                  />
+                  <div>
+                    <label className="block font-mono text-[11px] uppercase tracking-wider text-saturn-muted mb-1.5">
+                      Phone / WhatsApp *
+                    </label>
+                    <input
+                      type="tel"
+                      name="contact"
+                      required
+                      value={formData.contact}
+                      onChange={handleChange}
+                      placeholder="+91 79826 68530"
+                      className="w-full px-3.5 py-3 rounded-xl bg-black/60 border border-white/10 text-white placeholder:text-saturn-dim focus:outline-none focus:border-saturn-green focus:ring-1 focus:ring-saturn-green font-sans text-xs sm:text-sm transition-all"
+                    />
+                  </div>
                 </div>
 
                 <div>
